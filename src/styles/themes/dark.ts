@@ -1,6 +1,8 @@
 import { Theme } from "./index"
 
 const dark: Theme = {
+  brandPrimary: "#39F3BB",
+
   backgroundPrimary: "#353544",
   backgroundSecondary: "#49495C",
   backgroundTertiary: "#575778",
