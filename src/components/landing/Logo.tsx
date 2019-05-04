@@ -7,8 +7,9 @@ const LogoContainer = styled.View`
   justify-content: flex-end;
   align-items: center;
 `
-
-const LogoIcon = () => <FontAwesome5 name={"gripfire"} size={180} color="#39F3BB" />
+const LogoIcon = () => (
+  <FontAwesome5 name={"gripfire"} size={180} color="#39F3BB" />
+)
 
 const Logo = () => (
   <LogoContainer>
