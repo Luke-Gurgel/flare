@@ -1,8 +1,9 @@
 import { createStackNavigator, createAppContainer } from "react-navigation"
 import Landing from "../landing/index"
+import AppIntro from "../app-intro/index"
 
 const LandingNavigator = createStackNavigator(
-  { landing: Landing },
+  { landing: Landing, appIntro: AppIntro },
   { initialRouteName: "landing", headerMode: "none" },
 )
 
