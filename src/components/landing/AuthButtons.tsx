@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components/native"
-import ThemeProps from "src/types/ThemeProps"
+import { ThemeProps } from "src/types/index"
 
 const AuthButtonsContainer = styled.View`
   flex-grow: 1;

@@ -1,7 +1,11 @@
 import React from "react"
 import { TouchableOpacity } from "react-native"
 import styled from "styled-components/native"
-import ThemeProps from "src/types/ThemeProps"
+import { ThemeProps } from "src/types/index"
+
+interface Props {
+  showAppIntro: () => void
+}
 
 const Container = styled.View`
   flex-grow: 1;
@@ -21,11 +25,11 @@ const PlainButtonText = styled.Text<ThemeProps>`
   margin-top: 10px;
 `
 
-const AppIntroInvite = () => {
+const AppIntroInvite = ({ showAppIntro }: Props) => {
   return (
     <Container>
-      <Message>Wanna know how this works?</Message>
-      <TouchableOpacity>
+      <Message>Wanna know how it works?</Message>
+      <TouchableOpacity onPress={showAppIntro}>
         <PlainButtonText>Check this out</PlainButtonText>
       </TouchableOpacity>
     </Container>
