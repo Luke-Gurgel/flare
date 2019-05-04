@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix"
   },
@@ -57,6 +57,7 @@
     "metro-react-native-babel-preset": "0.53.1",
     "prettier": "^1.17.0",
     "react-test-renderer": "16.8.3",
+    "ts-jest": "^24.0.2",
     "typescript": "3.4.5"
   },
   "jest": {
