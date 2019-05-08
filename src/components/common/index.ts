@@ -1,4 +1,5 @@
-import LogoIcon from "./LogoIcon"
+import Page from "./Page"
 import BackButton from "./BackButton"
+import LogoIcon from "./LogoIcon"
 
-export { LogoIcon, BackButton }
+export { Page, BackButton, LogoIcon }

@@ -1,14 +1,10 @@
 import React from "react"
 import styled from "styled-components/native"
-import { LogoIcon } from "src/components/common/index"
+import { Page, LogoIcon } from "src/components/common/index"
 import Message from "./Message"
 import AuthButtons from "./AuthButtons"
 import AppIntroInvite from "./AppIntroInvite"
 import { NavigationProps } from "src/types/index"
-
-const Page = styled.View`
-  flex-grow: 1;
-`
 
 const LogoContainer = styled.View`
   flex-grow: 1;
