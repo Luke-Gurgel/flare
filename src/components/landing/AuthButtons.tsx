@@ -1,44 +1,21 @@
 import React from "react"
-import styled from "styled-components/native"
-import { ThemeProps } from "src/types/index"
+import {
+  AuthButtonsContainer,
+  LoginButton,
+  LoginButtonText,
+  SignupButton,
+  SignupButtonText,
+} from "./styled"
 
-const AuthButtonsContainer = styled.View`
-  flex-grow: 1;
-  align-items: center;
-`
+interface Props {
+  login: () => void
+  // signup: () => void
+}
 
-const AuthButton = styled.TouchableOpacity`
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  padding: 12px 0;
-  margin: 10px 0;
-  border-radius: 12px;
-`
-const AuthButtonText = styled.Text`
-  font-size: 18px;
-  font-weight: 800;
-`
-
-const LoginButton = styled(AuthButton)<ThemeProps>`
-  background-color: ${(props) => props.theme.brandPrimary};
-`
-const LoginButtonText = styled(AuthButtonText)`
-  color: white;
-`
-
-const SignupButton = styled(AuthButton)`
-  background-color: transparent;
-  border: ${(props) => `1px solid ${props.theme.brandPrimary}`};
-`
-const SignupButtonText = styled(AuthButtonText)`
-  color: ${(props) => props.theme.brandPrimary};
-`
-
-const AuthButtons = () => {
+const AuthButtons = ({ login }: Props) => {
   return (
     <AuthButtonsContainer>
-      <LoginButton>
+      <LoginButton onPress={login}>
         <LoginButtonText>Log in</LoginButtonText>
       </LoginButton>
       <SignupButton>

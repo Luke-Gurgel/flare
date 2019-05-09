@@ -17,13 +17,17 @@ const Landing = ({ navigation }: NavigationProps) => {
     navigation.navigate && navigation.navigate("appIntro")
   }
 
+  const login = () => {
+    navigation.navigate && navigation.navigate("login")
+  }
+
   return (
     <Page>
       <LogoContainer>
         <LogoIcon size={180} />
       </LogoContainer>
       <Message />
-      <AuthButtons />
+      <AuthButtons login={login} />
       <AppIntroInvite showAppIntro={showAppIntro} />
     </Page>
   )
