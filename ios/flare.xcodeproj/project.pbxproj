@@ -39,6 +39,7 @@
 		673A26C2319640899B861E28 /* libRNGestureHandler-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02ADE747C2E4496989553885 /* libRNGestureHandler-tvOS.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A3128B6F2283AB2A00565FCC /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3128B452283AAE500565FCC /* libBVLinearGradient.a */; };
+		A3128B802283B2E400565FCC /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3128B452283AAE500565FCC /* libBVLinearGradient.a */; };
 		A3E7AA4322750A330050B90B /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3E7AA3422750A320050B90B /* Octicons.ttf */; };
 		A3E7AA4422750A330050B90B /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3E7AA3522750A320050B90B /* Feather.ttf */; };
 		A3E7AA4522750A330050B90B /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3E7AA3622750A320050B90B /* Entypo.ttf */; };
@@ -427,6 +428,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3128B802283B2E400565FCC /* libBVLinearGradient.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
