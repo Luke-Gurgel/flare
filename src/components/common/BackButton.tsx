@@ -9,7 +9,7 @@ interface Props extends ThemeProps {
 }
 
 const BackButton = ({ theme, onPress }: Props) => (
-  <TouchableOpacity onPress={onPress} style={{ paddingLeft: 20 }}>
+  <TouchableOpacity onPress={onPress} style={{ alignSelf: "flex-start" }}>
     <Icon name="ios-arrow-round-back" size={28} color={theme.textSecondary} />
   </TouchableOpacity>
 )
