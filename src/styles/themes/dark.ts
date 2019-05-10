@@ -11,6 +11,9 @@ const dark: Theme = {
   textSecondary: "#9494A7",
   textTertiary: "#A8B3D5",
   textHyperlink: "#FFA0FE",
+
+  softButtonBackground: "#FFF",
+  softButtonText: "#04d697",
 }
 
 export default dark

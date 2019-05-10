@@ -11,6 +11,9 @@ const light: Theme = {
   textSecondary: "#7D7D7D",
   textTertiary: "#C0C0C0",
   textHyperlink: "#6497D2",
+
+  softButtonBackground: "#39F3BB",
+  softButtonText: "#FFF",
 }
 
 export default light

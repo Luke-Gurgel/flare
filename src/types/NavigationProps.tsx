@@ -3,5 +3,6 @@ export default interface NavigationProps {
     navigate?: (whereTo: string, data?: any) => void
     pop?: () => void
     goBack?: () => void
+    dismiss?: () => void
   }
 }

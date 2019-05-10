@@ -12,6 +12,9 @@ export interface Theme {
   textSecondary: string
   textTertiary: string
   textHyperlink: string
+
+  softButtonBackground: string
+  softButtonText: string
 }
 
 export default { light, dark }
