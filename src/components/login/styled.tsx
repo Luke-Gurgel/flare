@@ -69,3 +69,16 @@ export const LoginButtonView = styled(SoftButtonView)`
 export const LoginButtonText = styled(SoftButtonText)`
   color: #04d697;
 `
+
+export const ForgotPasswordButtonText = styled.Text`
+  font-style: italic;
+  font-size: 13px;
+  color: #fff;
+  margin-top: 10px;
+`
+
+export const ForgotPasswordButton = ({ onPress }: { onPress: () => void }) => (
+  <TouchableOpacity onPress={onPress}>
+    <ForgotPasswordButtonText>Forgot your password?</ForgotPasswordButtonText>
+  </TouchableOpacity>
+)

@@ -4,6 +4,7 @@ import {
   PasswordInput,
   LoginButtonView,
   LoginButtonText,
+  ForgotPasswordButton,
 } from "./styled"
 
 interface LoginButtonProps {
@@ -22,6 +23,7 @@ const LoginForm = () => {
     <>
       <EmailInput />
       <PasswordInput />
+      <ForgotPasswordButton onPress={() => {}} />
       <LoginButton title="Log in" onPress={() => {}} />
     </>
   )
