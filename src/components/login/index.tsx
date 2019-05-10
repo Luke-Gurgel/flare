@@ -4,10 +4,15 @@ import { NavigationProps } from "src/types/index"
 import { GradientPage, CloseButton, LogoContainer, AppName } from "./styled"
 import { LogoIcon } from "src/components/common"
 import LoginForm from "./LoginForm"
+import SignupInvite from "./SignupInvite"
 
 const Login = ({ navigation }: NavigationProps) => {
   const dismiss = () => {
     navigation.dismiss && navigation.dismiss()
+  }
+
+  const goToSignupPage = () => {
+    navigation.navigate && navigation.navigate("signup")
   }
 
   return (
@@ -19,6 +24,7 @@ const Login = ({ navigation }: NavigationProps) => {
         <AppName>Flare</AppName>
       </LogoContainer>
       <LoginForm />
+      <SignupInvite goToSignupPage={goToSignupPage} />
     </GradientPage>
   )
 }
