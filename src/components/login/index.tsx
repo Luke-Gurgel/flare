@@ -3,6 +3,7 @@ import { StatusBar } from "react-native"
 import { NavigationProps } from "src/types/index"
 import { GradientPage, CloseButton, LogoContainer, AppName } from "./styled"
 import { LogoIcon } from "src/components/common"
+import LoginForm from "./LoginForm"
 
 const Login = ({ navigation }: NavigationProps) => {
   const dismiss = () => {
@@ -17,6 +18,7 @@ const Login = ({ navigation }: NavigationProps) => {
         <LogoIcon size={160} color="#04d697" />
         <AppName>Flare</AppName>
       </LogoContainer>
+      <LoginForm />
     </GradientPage>
   )
 }

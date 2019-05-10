@@ -2,6 +2,7 @@ import React from "react"
 import { TouchableOpacity } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
 import Icon from "react-native-vector-icons/AntDesign"
+import { Hoshi } from "react-native-textinput-effects"
 import styled from "styled-components/native"
 
 interface Props {
@@ -34,3 +35,54 @@ export const AppName = styled.Text`
   color: #04d697;
   text-align: left;
 `
+
+export const EmailInput = styled(Hoshi).attrs({
+  label: "Email",
+  borderColor: "#04d697",
+  borderHeight: 1,
+  backgroundColor: "transparent",
+  labelStyle: { color: "#04d697", fontWeight: "600" },
+})`
+  border-bottom-color: #04d697;
+  border-bottom-width: 1;
+  margin-top: 30px;
+`
+
+export const PasswordInput = styled(Hoshi).attrs({
+  label: "Password",
+  borderColor: "#04d697",
+  borderHeight: 1,
+  backgroundColor: "transparent",
+  labelStyle: { color: "#04d697", fontWeight: "600" },
+})`
+  border-bottom-color: #04d697;
+  border-bottom-width: 1;
+  margin-top: 20px;
+`
+
+const ButtonView = styled.TouchableOpacity`
+  background-color: #fff;
+  align-self: flex-end;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 35px;
+  border-radius: 14px;
+  margin: 25px 20px 0 0;
+`
+
+const ButtonText = styled.Text`
+  color: #04d697;
+  font-size: 18px;
+  font-weight: 800;
+`
+
+interface LoginButtonProps {
+  title: string
+  onPress: () => void
+}
+
+export const LoginButton = ({ title, onPress }: LoginButtonProps) => (
+  <ButtonView onPress={onPress}>
+    <ButtonText>{title}</ButtonText>
+  </ButtonView>
+)
