@@ -1,9 +1,10 @@
 import React from "react"
 import styled from "styled-components/native"
-import { BackButton, LogoIcon } from "src/components/common/index"
+import { BackButton } from "src/components/common/index"
 
 interface Props {
   goBack: () => void
+  centerComponent?: JSX.Element
 }
 
 const Header = styled.View`
@@ -13,17 +14,17 @@ const Header = styled.View`
   padding-bottom: 10px;
 `
 
-const LogoContainer = styled.View`
+const CenterComponentContainer = styled.View`
   position: absolute;
   width: 100%;
   align-items: center;
 `
 
-const PageHeader = ({ goBack }: Props) => (
+const PageHeader = ({ goBack, centerComponent }: Props) => (
   <Header>
-    <LogoContainer>
-      <LogoIcon size={35} />
-    </LogoContainer>
+    <CenterComponentContainer>
+      {centerComponent !== undefined ? centerComponent : <></>}
+    </CenterComponentContainer>
     <BackButton onPress={goBack} />
   </Header>
 )
