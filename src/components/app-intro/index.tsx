@@ -1,7 +1,8 @@
 import React from "react"
-import { View, ScrollView } from "react-native"
-import { NavigationProps } from "src/types/index"
+import { ScrollView } from "react-native"
 import PageHeader from "./PageHeader"
+import { Page } from "src/components/common/index"
+import { NavigationProps } from "src/types/index"
 import pageArray from "./page-array"
 
 const AppIntro = ({ navigation }: NavigationProps) => {
@@ -10,7 +11,7 @@ const AppIntro = ({ navigation }: NavigationProps) => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <Page>
       <PageHeader goBack={goBack} />
       <ScrollView
         horizontal
@@ -20,7 +21,7 @@ const AppIntro = ({ navigation }: NavigationProps) => {
       >
         {pageArray}
       </ScrollView>
-    </View>
+    </Page>
   )
 }
 

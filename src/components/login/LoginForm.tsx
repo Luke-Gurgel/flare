@@ -1,5 +1,21 @@
 import React from "react"
-import { EmailInput, PasswordInput, LoginButton } from "./styled"
+import {
+  EmailInput,
+  PasswordInput,
+  LoginButtonView,
+  LoginButtonText,
+} from "./styled"
+
+interface LoginButtonProps {
+  title: string
+  onPress: () => void
+}
+
+const LoginButton = ({ title, onPress }: LoginButtonProps) => (
+  <LoginButtonView onPress={onPress}>
+    <LoginButtonText>{title}</LoginButtonText>
+  </LoginButtonView>
+)
 
 const LoginForm = () => {
   return (

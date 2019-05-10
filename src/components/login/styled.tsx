@@ -3,6 +3,7 @@ import { TouchableOpacity } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
 import Icon from "react-native-vector-icons/AntDesign"
 import { Hoshi } from "react-native-textinput-effects"
+import { SoftButtonView, SoftButtonText } from "src/components/common/index"
 import styled from "styled-components/native"
 
 interface Props {
@@ -59,30 +60,12 @@ export const PasswordInput = styled(Hoshi).attrs({
   border-bottom-width: 1;
   margin-top: 20px;
 `
-
-const ButtonView = styled.TouchableOpacity`
+export const LoginButtonView = styled(SoftButtonView)`
   background-color: #fff;
   align-self: flex-end;
-  justify-content: center;
-  align-items: center;
-  padding: 14px 35px;
-  border-radius: 14px;
   margin: 25px 20px 0 0;
 `
 
-const ButtonText = styled.Text`
+export const LoginButtonText = styled(SoftButtonText)`
   color: #04d697;
-  font-size: 18px;
-  font-weight: 800;
 `
-
-interface LoginButtonProps {
-  title: string
-  onPress: () => void
-}
-
-export const LoginButton = ({ title, onPress }: LoginButtonProps) => (
-  <ButtonView onPress={onPress}>
-    <ButtonText>{title}</ButtonText>
-  </ButtonView>
-)
