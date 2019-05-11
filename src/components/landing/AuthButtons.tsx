@@ -9,16 +9,16 @@ import {
 
 interface Props {
   login: () => void
-  // signup: () => void
+  signup: () => void
 }
 
-const AuthButtons = ({ login }: Props) => {
+const AuthButtons = ({ login, signup }: Props) => {
   return (
     <AuthButtonsContainer>
       <LoginButton onPress={login}>
         <LoginButtonText>Log in</LoginButtonText>
       </LoginButton>
-      <SignupButton>
+      <SignupButton onPress={signup}>
         <SignupButtonText>Sign up</SignupButtonText>
       </SignupButton>
     </AuthButtonsContainer>

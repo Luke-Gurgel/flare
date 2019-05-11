@@ -4,5 +4,6 @@ export default interface NavigationProps {
     pop?: () => void
     goBack?: () => void
     dismiss?: () => void
+    getParam?: (param: string, defaultValue?: any) => any
   }
 }

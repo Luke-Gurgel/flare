@@ -7,7 +7,9 @@ import { NavigationProps } from "src/types/index"
 
 const Signup = ({ navigation }: NavigationProps) => {
   const goBack = () => {
-    navigation.goBack && navigation.goBack()
+    navigation.getParam && navigation.getParam("comingFromLanding", false)
+      ? navigation.dismiss && navigation.dismiss()
+      : navigation.goBack && navigation.goBack()
   }
 
   return (
