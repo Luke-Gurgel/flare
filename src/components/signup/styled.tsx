@@ -42,7 +42,10 @@ export const EmailInput = () => (
     <TextInput
       placeholder="Email"
       keyboardType="email-address"
+      autoCapitalize="none"
+      autoCorrect={false}
       style={{ flex: 1, textAlign: "right" }}
+      underlineColorAndroid="transparent"
     />
   </InputContainer>
 )
@@ -51,9 +54,12 @@ export const PasswordInput = () => (
   <InputContainer>
     <Entypo name={"lock"} size={20} color="lightgray" />
     <TextInput
-      placeholder="Email"
-      keyboardType="email-address"
+      secureTextEntry
+      placeholder="Password"
+      autoCapitalize="none"
+      autoCorrect={false}
       style={{ flex: 1, textAlign: "right" }}
+      underlineColorAndroid="transparent"
     />
   </InputContainer>
 )
@@ -62,9 +68,12 @@ export const ConfirmPasswordInput = () => (
   <InputContainer>
     <Entypo name={"lock"} size={20} color="lightgray" />
     <TextInput
-      placeholder="Email"
-      keyboardType="email-address"
+      secureTextEntry
+      placeholder="Retype password"
+      autoCapitalize="none"
+      autoCorrect={false}
       style={{ flex: 1, textAlign: "right" }}
+      underlineColorAndroid="transparent"
     />
   </InputContainer>
 )
