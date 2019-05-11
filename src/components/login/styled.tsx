@@ -1,21 +1,8 @@
-import React from "react"
-import { TouchableOpacity } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
-import Icon from "react-native-vector-icons/AntDesign"
 import { Hoshi } from "react-native-textinput-effects"
 import { SoftButtonView, SoftButtonText } from "src/components/common/index"
 import styled from "styled-components/native"
 import { ThemeProps } from "src/types/index"
-
-interface Props {
-  onPress: () => void
-}
-
-export const CloseButton = ({ onPress }: Props) => (
-  <TouchableOpacity onPress={onPress} style={{ alignSelf: "flex-end" }}>
-    <Icon name="closecircle" size={28} color="rgba(255,255,255, 0.8)" />
-  </TouchableOpacity>
-)
 
 export const GradientPage = styled(LinearGradient).attrs({
   colors: ["#39F3BB", "#90F9C4"],
@@ -86,9 +73,3 @@ export const ForgotPasswordButtonText = styled.Text`
   color: #fff;
   margin-top: 10px;
 `
-
-export const ForgotPasswordButton = ({ onPress }: { onPress: () => void }) => (
-  <TouchableOpacity onPress={onPress}>
-    <ForgotPasswordButtonText>Forgot your password?</ForgotPasswordButtonText>
-  </TouchableOpacity>
-)

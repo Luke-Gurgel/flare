@@ -1,23 +1,31 @@
-import React from "react"
+import React, { useState } from "react"
 import { View } from "react-native"
-import {
-  EmailInput,
-  PasswordInput,
-  ConfirmPasswordInput,
-  SignupButton,
-  Legalese,
-} from "./styled"
+import { withNavigation } from "react-navigation"
+import { EmailInput, PasswordInput, ConfirmPasswordInput } from "./SignupInputs"
+import Legalese from "./Legalese"
+import SignupButton from "./SignupButton"
+import { NavigationProps } from "src/types/index"
 
-const SignupForm = () => {
+const SignupForm = ({ navigation }: NavigationProps) => {
+  const [loading, setLoading] = useState(false)
+
+  const attemptSignup = () => {
+    setLoading(true)
+  }
+
   return (
     <View style={{ paddingTop: 20 }}>
       <EmailInput />
       <PasswordInput />
       <ConfirmPasswordInput />
-      <SignupButton title="Sign up" onPress={() => {}} />
+      <SignupButton
+        title="Sign up"
+        disabled={loading}
+        onPress={attemptSignup}
+      />
       <Legalese />
     </View>
   )
 }
 
-export default SignupForm
+export default withNavigation(SignupForm)
