@@ -11,7 +11,11 @@ const AppIntro = ({ navigation }: NavigationProps) => {
 
   return (
     <Page>
-      <PageHeader goBack={goBack} centerComponent={<LogoIcon size={35} />} />
+      <PageHeader
+        goBack={goBack}
+        dismissButtonType="back"
+        centerComponent={<LogoIcon size={35} />}
+      />
       <ScrollView
         horizontal
         pagingEnabled

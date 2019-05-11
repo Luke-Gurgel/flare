@@ -6,8 +6,11 @@ import SignupForm from "./SignupForm"
 import { NavigationProps } from "src/types/index"
 
 const Signup = ({ navigation }: NavigationProps) => {
-  const goBack = () => {
+  const comingFromLanding =
     navigation.getParam && navigation.getParam("comingFromLanding", false)
+
+  const goBack = () => {
+    comingFromLanding
       ? navigation.dismiss && navigation.dismiss()
       : navigation.goBack && navigation.goBack()
   }
@@ -17,6 +20,7 @@ const Signup = ({ navigation }: NavigationProps) => {
       <StatusBar barStyle="default" />
       <PageHeader
         goBack={goBack}
+        dismissButtonType={comingFromLanding ? "close" : "back"}
         centerComponent={<PageTitle>Sign up</PageTitle>}
       />
       <Message>Create an account</Message>

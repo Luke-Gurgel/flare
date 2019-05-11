@@ -1,9 +1,12 @@
 import React from "react"
 import styled from "styled-components/native"
-import { BackButton } from "src/components/common/index"
+import { BackButton, CloseButton } from "src/components/common/index"
+
+type DismissButtonType = "back" | "close"
 
 interface Props {
   goBack: () => void
+  dismissButtonType: DismissButtonType
   centerComponent?: JSX.Element
 }
 
@@ -21,13 +24,26 @@ const CenterComponentContainer = styled.View`
   padding-bottom: 15px;
 `
 
-const PageHeader = ({ goBack, centerComponent }: Props) => (
-  <Header>
-    <CenterComponentContainer>
-      {centerComponent !== undefined ? centerComponent : <></>}
-    </CenterComponentContainer>
-    <BackButton onPress={goBack} />
-  </Header>
-)
+const PageHeader = ({ goBack, dismissButtonType, centerComponent }: Props) => {
+  const renderDismissButton = (): JSX.Element => {
+    switch (dismissButtonType) {
+      case "back":
+        return <BackButton onPress={goBack} />
+      case "close":
+        return <CloseButton onPress={goBack} />
+      default:
+        return <></>
+    }
+  }
+
+  return (
+    <Header>
+      <CenterComponentContainer>
+        {centerComponent !== undefined ? centerComponent : <></>}
+      </CenterComponentContainer>
+      {renderDismissButton()}
+    </Header>
+  )
+}
 
 export default PageHeader
