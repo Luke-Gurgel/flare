@@ -4,6 +4,7 @@ import { SoftButtonView, SoftButtonText } from "./SoftButton"
 import BackButton from "./BackButton"
 import CloseButton from "./CloseButton"
 import LogoIcon from "./LogoIcon"
+import LoadingModal from "./LoadingModal"
 
 export {
   Page,
@@ -13,4 +14,5 @@ export {
   LogoIcon,
   SoftButtonView,
   SoftButtonText,
+  LoadingModal,
 }

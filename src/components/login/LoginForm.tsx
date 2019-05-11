@@ -1,10 +1,10 @@
 import React from "react"
+import ForgotPasswordButton from "./ForgotPasswordButton"
 import {
   EmailInput,
   PasswordInput,
   LoginButtonView,
   LoginButtonText,
-  ForgotPasswordButton,
 } from "./styled"
 
 interface LoginButtonProps {
