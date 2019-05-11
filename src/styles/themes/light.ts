@@ -2,6 +2,7 @@ import { Theme } from "./index"
 
 const light: Theme = {
   brandPrimary: "#39F3BB",
+  brandSecondary: "#90F9C4",
 
   backgroundPrimary: "#FBFBFD",
   backgroundSecondary: "#FFF",

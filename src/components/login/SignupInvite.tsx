@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components/native"
 import { SoftButtonView, SoftButtonText } from "src/components/common/index"
+import { ThemeProps } from "src/types/index"
 
 const Container = styled.View`
   flex-grow: 1;
@@ -20,8 +21,8 @@ const InviteButtonView = styled(SoftButtonView)`
   margin: 25px 0;
 `
 
-const InviteButtonText = styled(SoftButtonText)`
-  color: #04d697;
+const InviteButtonText = styled(SoftButtonText)<ThemeProps>`
+  color: ${(props) => props.theme.brandSecondary};
 `
 
 const message = "First time here? Let's get you setup!"
