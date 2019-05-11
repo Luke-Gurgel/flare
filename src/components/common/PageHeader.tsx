@@ -10,7 +10,7 @@ interface Props {
 const Header = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
   padding-bottom: 10px;
 `
 
@@ -18,6 +18,7 @@ const CenterComponentContainer = styled.View`
   position: absolute;
   width: 100%;
   align-items: center;
+  padding-bottom: 15px;
 `
 
 const PageHeader = ({ goBack, centerComponent }: Props) => (
