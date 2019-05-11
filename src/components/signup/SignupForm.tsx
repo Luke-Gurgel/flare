@@ -5,12 +5,25 @@ import { EmailInput, PasswordInput, ConfirmPasswordInput } from "./SignupInputs"
 import Legalese from "./Legalese"
 import SignupButton from "./SignupButton"
 import { NavigationProps } from "src/types/index"
+import { LoadingModal } from "src/components/common/index"
 
 const SignupForm = ({ navigation }: NavigationProps) => {
-  const [loading, setLoading] = useState(false)
+  const [signupRequest, setSignupRequest] = useState({
+    loading: false,
+    success: false,
+  })
 
   const attemptSignup = () => {
-    setLoading(true)
+    setSignupRequest({ loading: true, success: false })
+    setTimeout(() => {
+      setSignupRequest({ loading: false, success: true })
+    }, 3000)
+  }
+
+  const goToInformativePage = () => {
+    if (signupRequest.success) {
+      navigation.navigate && navigation.navigate("informativePage")
+    }
   }
 
   return (
@@ -18,12 +31,12 @@ const SignupForm = ({ navigation }: NavigationProps) => {
       <EmailInput />
       <PasswordInput />
       <ConfirmPasswordInput />
-      <SignupButton
-        title="Sign up"
-        disabled={loading}
-        onPress={attemptSignup}
-      />
+      <SignupButton title="Sign up" onPress={attemptSignup} />
       <Legalese />
+      <LoadingModal
+        visible={signupRequest.loading}
+        onDismiss={goToInformativePage}
+      />
     </View>
   )
 }
