@@ -21,13 +21,18 @@ const Landing = ({ navigation }: NavigationProps) => {
     navigation.navigate && navigation.navigate("login")
   }
 
+  const signup = () => {
+    navigation.navigate &&
+      navigation.navigate("signup", { comingFromLanding: true })
+  }
+
   return (
     <Page>
       <LogoContainer>
         <LogoIcon size={180} />
       </LogoContainer>
       <Message />
-      <AuthButtons login={login} />
+      <AuthButtons login={login} signup={signup} />
       <AppIntroInvite showAppIntro={showAppIntro} />
     </Page>
   )

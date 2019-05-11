@@ -3,6 +3,7 @@ import dark from "./dark"
 
 export interface Theme {
   brandPrimary: string
+  brandSecondary: string
 
   backgroundPrimary: string
   backgroundSecondary: string

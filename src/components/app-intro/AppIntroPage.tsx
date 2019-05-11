@@ -11,14 +11,13 @@ interface Props {
 const PageContainer = styled.View`
   flex-grow: 1;
   width: ${() => width};
-  padding: 20px;
 `
 
 const PageTitle = styled.Text<ThemeProps>`
   color: ${(props) => props.theme.textPrimary};
   font-size: 28px;
   font-weight: bold;
-  margin-top: 12px;
+  margin-top: 20px;
 `
 
 const PageDescription = styled.Text<ThemeProps>`

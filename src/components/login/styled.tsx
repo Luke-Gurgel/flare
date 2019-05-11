@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/AntDesign"
 import { Hoshi } from "react-native-textinput-effects"
 import { SoftButtonView, SoftButtonText } from "src/components/common/index"
 import styled from "styled-components/native"
+import { ThemeProps } from "src/types/index"
 
 interface Props {
   onPress: () => void
@@ -38,11 +39,16 @@ export const AppName = styled.Text`
 `
 
 export const EmailInput = styled(Hoshi).attrs({
+  keyboardType: "email-address",
+  autoCapitalize: "none",
+  autoCorrect: false,
   label: "Email",
   borderColor: "#04d697",
   borderHeight: 1,
   backgroundColor: "transparent",
   labelStyle: { color: "#04d697", fontWeight: "600" },
+  underlineColorAndroid: "transparent",
+  inputStyle: { color: "#fff" },
 })`
   border-bottom-color: #04d697;
   border-bottom-width: 1;
@@ -50,11 +56,15 @@ export const EmailInput = styled(Hoshi).attrs({
 `
 
 export const PasswordInput = styled(Hoshi).attrs({
+  secureTextEntry: true,
+  autoCapitalize: "none",
+  autoCorrect: false,
   label: "Password",
   borderColor: "#04d697",
   borderHeight: 1,
   backgroundColor: "transparent",
   labelStyle: { color: "#04d697", fontWeight: "600" },
+  inputStyle: { color: "#fff" },
 })`
   border-bottom-color: #04d697;
   border-bottom-width: 1;
@@ -66,8 +76,8 @@ export const LoginButtonView = styled(SoftButtonView)`
   margin: 25px 20px 0 0;
 `
 
-export const LoginButtonText = styled(SoftButtonText)`
-  color: #04d697;
+export const LoginButtonText = styled(SoftButtonText)<ThemeProps>`
+  color: ${(props) => props.theme.brandSecondary};
 `
 
 export const ForgotPasswordButtonText = styled.Text`

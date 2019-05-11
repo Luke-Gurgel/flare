@@ -2,7 +2,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation"
 import Landing from "../landing/index"
 import AppIntro from "../app-intro/index"
 import Login from "../login/index"
-// import Signup from "../signup/index"
+import Signup from "../signup/index"
 
 const LandingNavigator = createStackNavigator(
   { landing: Landing, appIntro: AppIntro },
@@ -10,7 +10,7 @@ const LandingNavigator = createStackNavigator(
 )
 
 const AuthNavigator = createStackNavigator(
-  { login: Login }, // signup: Signup
+  { login: Login, signup: Signup },
   { headerMode: "none" },
 )
 

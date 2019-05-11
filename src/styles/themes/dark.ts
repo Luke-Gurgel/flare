@@ -2,6 +2,7 @@ import { Theme } from "./index"
 
 const dark: Theme = {
   brandPrimary: "#39F3BB",
+  brandSecondary: "#90F9C4",
 
   backgroundPrimary: "#353544",
   backgroundSecondary: "#49495C",
