@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { View } from "react-native"
 import { withNavigation } from "react-navigation"
 import { EmailInput, PasswordInput, ConfirmPasswordInput } from "./SignupInputs"
@@ -26,6 +26,12 @@ const SignupForm = ({ navigation }: NavigationProps) => {
     }
   }
 
+  useEffect(() => {
+    if (signupRequest.success && !signupRequest.loading) {
+      goToInformativePage()
+    }
+  })
+
   return (
     <View style={{ paddingTop: 20 }}>
       <EmailInput />
@@ -33,10 +39,7 @@ const SignupForm = ({ navigation }: NavigationProps) => {
       <ConfirmPasswordInput />
       <SignupButton title="Sign up" onPress={attemptSignup} />
       <Legalese />
-      <LoadingModal
-        visible={signupRequest.loading}
-        onDismiss={goToInformativePage}
-      />
+      <LoadingModal visible={signupRequest.loading} />
     </View>
   )
 }
