@@ -32,7 +32,6 @@ export const EmailInput = styled(Hoshi).attrs({
   label: "Email",
   borderColor: "#04d697",
   borderHeight: 1,
-  backgroundColor: "transparent",
   labelStyle: { color: "#04d697", fontWeight: "600" },
   underlineColorAndroid: "transparent",
   inputStyle: { color: "#fff" },
@@ -49,7 +48,6 @@ export const PasswordInput = styled(Hoshi).attrs({
   label: "Password",
   borderColor: "#04d697",
   borderHeight: 1,
-  backgroundColor: "transparent",
   labelStyle: { color: "#04d697", fontWeight: "600" },
   inputStyle: { color: "#fff" },
 })`
