@@ -1,6 +1,7 @@
 import React from "react"
 import { ScrollView } from "react-native"
-import { Page, PageHeader, LogoIcon } from "src/components/common/index"
+import { Page } from "./styled"
+import PageHeader from "./PageHeader"
 import { NavigationProps } from "src/types/index"
 import pageArray from "./page-array"
 
@@ -11,11 +12,7 @@ const AppIntro = ({ navigation }: NavigationProps) => {
 
   return (
     <Page>
-      <PageHeader
-        goBack={goBack}
-        dismissButtonType="back"
-        centerComponent={<LogoIcon size={35} />}
-      />
+      <PageHeader goBack={goBack} />
       <ScrollView
         horizontal
         pagingEnabled
