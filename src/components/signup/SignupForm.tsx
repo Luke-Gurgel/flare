@@ -17,7 +17,7 @@ const SignupForm = ({ navigation }: NavigationProps) => {
     setSignupRequest({ loading: true, success: false })
     setTimeout(() => {
       setSignupRequest({ loading: false, success: true })
-    }, 3000)
+    }, 1000)
   }
 
   const goToInformativePage = () => {

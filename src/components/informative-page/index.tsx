@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
-import { AppState, AppStateStatus, Alert } from "react-native"
+import { AppState, AppStateStatus, Alert, Platform } from "react-native"
 import Permissions from "react-native-permissions"
+import AndroidOpenSettings from "react-native-android-open-settings"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import { Page } from "src/components/common/index"
 import LaterButton from "./LaterButton"
@@ -15,9 +16,7 @@ import {
 } from "./styled"
 
 const InformativePage = () => {
-  const goToHomeScreen = () => {
-    console.log("go to home screen")
-  }
+  const goToHomeScreen = () => {}
 
   const handleNoPermission = () => {
     getApproximateLocation()
@@ -32,13 +31,17 @@ const InformativePage = () => {
 
   const handleOpenSettings = () => {
     AppState.addEventListener("change", listenerHandler)
-    Permissions.openSettings().catch(() => {
-      Alert.alert(
-        "Oops...",
-        "Couldn't open the settings app. If you're still interested, hop over there and allow location access. Let's just go to the home screen now.",
-        [{ text: "Ok, cool", onPress: handleNoPermission }],
-      )
-    })
+    if (Platform.OS === "android") {
+      AndroidOpenSettings.appDetailsSettings()
+    } else {
+      Permissions.openSettings().catch(() => {
+        Alert.alert(
+          "Oops...",
+          "Couldn't open the settings app. If you're still interested, hop over there and allow location access. Let's just go to the home screen now.",
+          [{ text: "Ok, cool", onPress: handleNoPermission }],
+        )
+      })
+    }
   }
 
   const confirmationAlert = () => {
@@ -57,8 +60,10 @@ const InformativePage = () => {
       switch (res) {
         case "authorized":
           goToHomeScreen()
+          break
         case "denied":
           confirmationAlert()
+          break
         default:
           handleNoPermission()
       }
