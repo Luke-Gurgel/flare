@@ -13,7 +13,6 @@ export const EmailInput = () => (
       autoCapitalize="none"
       autoCorrect={false}
       style={{ flex: 1, textAlign: "right" }}
-      underlineColorAndroid="transparent"
     />
   </InputContainer>
 )
@@ -27,7 +26,6 @@ export const PasswordInput = () => (
       autoCapitalize="none"
       autoCorrect={false}
       style={{ flex: 1, textAlign: "right" }}
-      underlineColorAndroid="transparent"
     />
   </InputContainer>
 )
@@ -41,7 +39,6 @@ export const ConfirmPasswordInput = () => (
       autoCapitalize="none"
       autoCorrect={false}
       style={{ flex: 1, textAlign: "right" }}
-      underlineColorAndroid="transparent"
     />
   </InputContainer>
 )

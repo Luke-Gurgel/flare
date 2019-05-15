@@ -12,7 +12,12 @@ const LandingNavigator = createStackNavigator(
 
 const AuthNavigator = createStackNavigator(
   { login: Login, signup: Signup, informativePage: InformativePage },
-  { headerMode: "none" },
+  {
+    headerMode: "none",
+    defaultNavigationOptions: {
+      gesturesEnabled: false,
+    },
+  },
 )
 
 const OnboardingNavigator = createStackNavigator(

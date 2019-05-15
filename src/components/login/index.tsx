@@ -20,7 +20,7 @@ const Login = ({ navigation }: NavigationProps) => {
     <GradientPage>
       <KeyboardAwareScrollView scrollEnabled={false}>
         <StatusBar barStyle="light-content" />
-        <CloseButton onPress={dismiss} />
+        <CloseButton onPress={dismiss} color="rgba(255,255,255,0.7)" />
         <LogoContainer>
           <LogoIcon size={150} color="#04d697" />
           <AppName>Flare</AppName>

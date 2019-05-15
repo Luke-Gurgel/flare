@@ -9,8 +9,9 @@ interface Props {
 }
 
 const PageContainer = styled.View`
-  flex-grow: 1;
   width: ${() => width};
+  flex-grow: 1;
+  padding: 0 20px;
 `
 
 const PageTitle = styled.Text<ThemeProps>`
