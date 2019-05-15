@@ -6,7 +6,6 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import { Page } from "src/components/common/index"
 import LaterButton from "./LaterButton"
 import AllowButton from "./AllowButton"
-import { getApproximateLocation } from "./locationMethods"
 import message from "./message"
 import {
   ImageContainer,
@@ -19,8 +18,19 @@ const InformativePage = () => {
   const goToHomeScreen = () => {}
 
   const handleNoPermission = () => {
-    getApproximateLocation()
-    // .then(goToHomeScreen)
+    fetch("https://ipapi.co/json/", {})
+      .then((res) => res.json())
+      .then((location) => {
+        const { city, region, country, latitude, longitude } = location
+        // dispatch an action to store location in the Redux store
+      })
+      .catch((err) => {
+        Alert.alert(
+          err.reason,
+          "Could not fetch an approximate location so the home screen map will be centered in Boston, MA. You can change this on your profile settings.",
+          [{ text: "Ok, cool", onPress: goToHomeScreen }],
+        )
+      })
   }
 
   const listenerHandler = (appState: AppStateStatus) => {
