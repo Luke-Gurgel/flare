@@ -7,7 +7,7 @@ import { Page } from "src/components/common/index"
 import LaterButton from "./LaterButton"
 import AllowButton from "./AllowButton"
 import message from "./message"
-import { MapDispatchProps, MapStateProps } from "./index"
+import { MapDispatchProps } from "./index"
 import {
   ImageContainer,
   MessageTitle,
@@ -15,18 +15,27 @@ import {
   ButtonsContainer,
 } from "./styled"
 
-interface Props extends MapStateProps, MapDispatchProps {}
-
-const InformativePage = (props: Props) => {
-  const goToHomeScreen = () => {}
-
-  const handleNoPermission = () => {
-    props.fetchApproximateLocation().then(goToHomeScreen)
+const InformativePage = (props: MapDispatchProps) => {
+  const goToHomeScreen = () => {
+    console.log("going to home screen")
   }
 
-  const listenerHandler = (appState: AppStateStatus) => {
+  const fetchLocation = () => {
+    props.fetchLocation().then(goToHomeScreen)
+  }
+
+  const handleNoPermission = () => {
+    props
+      .fetchApproximateLocation()
+      .then(goToHomeScreen)
+      .catch((err) => console.log(err))
+  }
+
+  const listenerHandler = async (appState: AppStateStatus) => {
     if (appState === "active") {
-      goToHomeScreen()
+      const res = await Permissions.check("location")
+      if (res === "authorized") fetchLocation()
+      else goToHomeScreen()
     }
   }
 
@@ -60,7 +69,7 @@ const InformativePage = (props: Props) => {
     Permissions.request("location").then((res) => {
       switch (res) {
         case "authorized":
-          goToHomeScreen()
+          fetchLocation()
           break
         case "denied":
           confirmationAlert()
