@@ -1,5 +1,11 @@
 import React, { useEffect } from "react"
-import { AppState, AppStateStatus, Alert, Platform } from "react-native"
+import {
+  AppState,
+  AppStateStatus,
+  Alert,
+  Platform,
+  BackHandler,
+} from "react-native"
 import Permissions from "react-native-permissions"
 import AndroidOpenSettings from "react-native-android-open-settings"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
@@ -7,7 +13,7 @@ import { Page } from "src/components/common/index"
 import LaterButton from "./LaterButton"
 import AllowButton from "./AllowButton"
 import message from "./message"
-import { MapDispatchProps } from "./index"
+import { MapDispatchProps, MapStateProps } from "./index"
 import {
   ImageContainer,
   MessageTitle,
@@ -15,27 +21,42 @@ import {
   ButtonsContainer,
 } from "./styled"
 
-const InformativePage = (props: MapDispatchProps) => {
+interface Props extends MapDispatchProps, MapStateProps {}
+
+const InformativePage = (props: Props) => {
   const goToHomeScreen = () => {
     console.log("going to home screen")
   }
 
-  const fetchLocation = () => {
-    props.fetchLocation().then(goToHomeScreen)
+  const fetchLocation = async () => {
+    await props.fetchLocation()
+    if (props.fetchLocationError) {
+      Alert.alert(
+        "Oops...",
+        "Could not fetch your location. We'll center the map on Boston, MA. You can change that in your profile settings.",
+        [{ text: "Ok, cool", onPress: goToHomeScreen }],
+      )
+    } else goToHomeScreen()
   }
 
-  const handleNoPermission = () => {
-    props
-      .fetchApproximateLocation()
-      .then(goToHomeScreen)
-      .catch((err) => console.log(err))
+  const handleNoPermission = async () => {
+    await props.fetchApproximateLocation()
+    if (props.fetchLocationError) {
+      Alert.alert(
+        "Oops...",
+        "Could not fetch an approximate location. We'll center the map on Boston, MA. You can change that in your profile settings.",
+        [{ text: "Ok, cool", onPress: goToHomeScreen }],
+      )
+    } else {
+      goToHomeScreen()
+    }
   }
 
   const listenerHandler = async (appState: AppStateStatus) => {
     if (appState === "active") {
       const res = await Permissions.check("location")
       if (res === "authorized") fetchLocation()
-      else goToHomeScreen()
+      else handleNoPermission()
     }
   }
 
@@ -81,8 +102,15 @@ const InformativePage = (props: MapDispatchProps) => {
   }
 
   useEffect(() => {
+    const blockAndroidBackButtonTap = () => true
+    BackHandler.addEventListener("hardwareBackPress", blockAndroidBackButtonTap)
+
     return function cleanup() {
       AppState.removeEventListener("change", listenerHandler)
+      BackHandler.removeEventListener(
+        "hardwareBackPress",
+        blockAndroidBackButtonTap,
+      )
     }
   })
 

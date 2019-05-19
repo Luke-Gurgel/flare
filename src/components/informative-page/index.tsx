@@ -10,6 +10,10 @@ export interface MapDispatchProps {
   fetchApproximateLocation: () => Promise<any>
 }
 
+export interface MapStateProps {
+  fetchLocationError: string | null | undefined
+}
+
 const mapDispatch = (
   dispatch: ThunkDispatch<InitialState, void, AnyAction>,
 ) => ({
@@ -18,7 +22,11 @@ const mapDispatch = (
     dispatch(asyncUserLocationActions.fetchApproximateLocation()),
 })
 
+const mapState = (state: InitialState): MapStateProps => ({
+  fetchLocationError: state.userLocation.errorMessage,
+})
+
 export default connect(
-  null,
+  mapState,
   mapDispatch,
 )(InformativePage)
