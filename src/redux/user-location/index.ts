@@ -22,9 +22,11 @@ export const userLocationReducer = (
     case UserLocationActionTypes.on_fetch_approximate_location_success:
       return { ...state, ...action.location }
     case UserLocationActionTypes.on_fetch_approximate_location_error:
-      return { ...state, errorMessage: action.reason }
-    case UserLocationActionTypes.set_accurate_location:
+      return { ...state, errorMessage: action.error }
+    case UserLocationActionTypes.on_fetch_location_success:
       return { ...state, ...action.location }
+    case UserLocationActionTypes.on_fetch_location_error:
+      return { ...state, errorMessage: action.error }
     default:
       return state
   }

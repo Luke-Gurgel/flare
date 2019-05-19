@@ -2,12 +2,23 @@ import { Dispatch } from "redux"
 import {
   UserLocationState,
   UserLocationActionTypes,
+  OnFetchLocationSuccess,
+  OnFetchLocationError,
   OnFetchApproximateLocationSuccessAction,
   OnFetchApproximateLocationErrorAction,
-  SetAccurateLocationAction,
 } from "./types"
 
 export const userLocationActions = {
+  onFetchLocationSuccess: (
+    location: UserLocationState,
+  ): OnFetchLocationSuccess => ({
+    type: UserLocationActionTypes.on_fetch_location_success,
+    location,
+  }),
+  onFetchLocationError: (error: string): OnFetchLocationError => ({
+    type: UserLocationActionTypes.on_fetch_location_error,
+    error,
+  }),
   onFetchApproximateLocationActionSuccess: (
     location: UserLocationState,
   ): OnFetchApproximateLocationSuccessAction => {
@@ -17,22 +28,36 @@ export const userLocationActions = {
     }
   },
   onFetchApproximateLocationActionError: (
-    reason: string,
+    error: string,
   ): OnFetchApproximateLocationErrorAction => {
     return {
       type: UserLocationActionTypes.on_fetch_approximate_location_error,
-      reason,
+      error,
     }
   },
-  setAccurateLocation: (
-    location: UserLocationState,
-  ): SetAccurateLocationAction => ({
-    type: UserLocationActionTypes.set_accurate_location,
-    location,
-  }),
 }
 
+const options = { timeout: 5000, enableHighAccuracy: true }
+
 export const asyncUserLocationActions = {
+  fetchLocation: () => async (dispatch: Dispatch) => {
+    navigator.geolocation.getCurrentPosition(
+      (location) => {
+        // eslint-disable-next-line prettier/prettier
+        const { coords: { latitude, longitude } } = location
+        return dispatch(
+          userLocationActions.onFetchLocationSuccess({
+            latitude,
+            longitude,
+            isApproximate: false,
+          }),
+        )
+      },
+      (error) =>
+        dispatch(userLocationActions.onFetchLocationError(error.message)),
+      options,
+    )
+  },
   fetchApproximateLocation: () => async (dispatch: Dispatch) => {
     try {
       const res = await fetch("https://ipapi.co/json/")
