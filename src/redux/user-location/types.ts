@@ -1,17 +1,28 @@
 export interface UserLocationState {
-  readonly city: string
-  readonly region: string
-  readonly country: string
   readonly latitude: number
   readonly longitude: number
   readonly isApproximate: boolean
+  readonly city?: string
+  readonly region?: string
+  readonly country?: string
   readonly errorMessage?: null | string
 }
 
 export enum UserLocationActionTypes {
   on_fetch_approximate_location_success = "on_fetch_approximate_location_success",
   on_fetch_approximate_location_error = "on_fetch_approximate_location_error",
-  set_accurate_location = "set_accurate_location",
+  on_fetch_location_success = "on_fetch_location_success",
+  on_fetch_location_error = "on_fetch_location_error",
+}
+
+export interface OnFetchLocationSuccess {
+  type: UserLocationActionTypes.on_fetch_location_success
+  location: UserLocationState
+}
+
+export interface OnFetchLocationError {
+  type: UserLocationActionTypes.on_fetch_location_error
+  error: string
 }
 
 export interface OnFetchApproximateLocationSuccessAction {
@@ -21,15 +32,11 @@ export interface OnFetchApproximateLocationSuccessAction {
 
 export interface OnFetchApproximateLocationErrorAction {
   type: UserLocationActionTypes.on_fetch_approximate_location_error
-  reason: string
-}
-
-export interface SetAccurateLocationAction {
-  type: UserLocationActionTypes.set_accurate_location
-  location: UserLocationState
+  error: string
 }
 
 export type UserLocationAction =
+  | OnFetchLocationSuccess
+  | OnFetchLocationError
   | OnFetchApproximateLocationSuccessAction
   | OnFetchApproximateLocationErrorAction
-  | SetAccurateLocationAction
