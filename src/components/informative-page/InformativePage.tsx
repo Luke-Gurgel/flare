@@ -39,7 +39,7 @@ const InformativePage = (props: Props) => {
     } else goToHomeScreen()
   }
 
-  const handleNoPermission = async () => {
+  const fetchApproximateLocation = async () => {
     await props.fetchApproximateLocation()
     if (props.fetchLocationError) {
       Alert.alert(
@@ -56,7 +56,7 @@ const InformativePage = (props: Props) => {
     if (appState === "active") {
       const res = await Permissions.check("location")
       if (res === "authorized") fetchLocation()
-      else handleNoPermission()
+      else fetchApproximateLocation()
     }
   }
 
@@ -69,7 +69,7 @@ const InformativePage = (props: Props) => {
         Alert.alert(
           "Oops...",
           "Couldn't open the settings app. If you're still interested, hop over there and allow location access. Let's just go to the home screen for now.",
-          [{ text: "Ok, cool", onPress: handleNoPermission }],
+          [{ text: "Ok, cool", onPress: fetchApproximateLocation }],
         )
       })
     }
@@ -77,10 +77,10 @@ const InformativePage = (props: Props) => {
 
   const confirmationAlert = () => {
     Alert.alert(
-      "You're missing out!",
-      "But remember, you can change this on the settings app at anytime.",
+      "Are you sure?",
+      "Remember you can change this on the settings app at anytime.",
       [
-        { text: "Not now", onPress: handleNoPermission },
+        { text: "Not now", onPress: fetchApproximateLocation },
         { text: "Open settings", onPress: handleOpenSettings },
       ],
     )
@@ -96,9 +96,20 @@ const InformativePage = (props: Props) => {
           confirmationAlert()
           break
         default:
-          handleNoPermission()
+          fetchApproximateLocation()
       }
     })
+  }
+
+  const encouragementAlert = () => {
+    Alert.alert(
+      "Come on",
+      "You'll miss out on the best experience Flare has to offer!",
+      [
+        { text: "Ok, fine", onPress: requestLocationPermission },
+        { text: "Not now", onPress: fetchApproximateLocation },
+      ],
+    )
   }
 
   useEffect(() => {
@@ -122,7 +133,7 @@ const InformativePage = (props: Props) => {
       <MessageTitle>Real quick...</MessageTitle>
       <Message>{message}</Message>
       <ButtonsContainer>
-        <LaterButton onPress={handleNoPermission} />
+        <LaterButton onPress={encouragementAlert} />
         <AllowButton onPress={requestLocationPermission} />
       </ButtonsContainer>
     </Page>
