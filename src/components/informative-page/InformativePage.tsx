@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import {
   AppState,
   AppStateStatus,
@@ -9,11 +9,12 @@ import {
 import Permissions from "react-native-permissions"
 import AndroidOpenSettings from "react-native-android-open-settings"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
-import { Page } from "src/components/common/index"
+import { Page, LoadingModal } from "src/components/common/index"
 import LaterButton from "./LaterButton"
 import AllowButton from "./AllowButton"
 import message from "./message"
 import { MapDispatchProps, MapStateProps } from "./index"
+import { NavigationProps } from "src/types/index"
 import {
   ImageContainer,
   MessageTitle,
@@ -21,14 +22,18 @@ import {
   ButtonsContainer,
 } from "./styled"
 
-interface Props extends MapDispatchProps, MapStateProps {}
+interface Props extends MapDispatchProps, MapStateProps, NavigationProps {}
 
 const InformativePage = (props: Props) => {
+  const [loading, setLoading] = useState(false)
+
   const goToHomeScreen = () => {
-    console.log("going to home screen")
+    setLoading(false)
+    props.navigation.navigate && props.navigation.navigate("home")
   }
 
   const fetchLocation = async () => {
+    setLoading(true)
     await props.fetchLocation()
     if (props.fetchLocationError) {
       Alert.alert(
@@ -40,6 +45,7 @@ const InformativePage = (props: Props) => {
   }
 
   const fetchApproximateLocation = async () => {
+    setLoading(true)
     await props.fetchApproximateLocation()
     if (props.fetchLocationError) {
       Alert.alert(
@@ -106,8 +112,8 @@ const InformativePage = (props: Props) => {
       "Come on",
       "You'll miss out on the best experience Flare has to offer!",
       [
-        { text: "Ok, fine", onPress: requestLocationPermission },
         { text: "Not now", onPress: fetchApproximateLocation },
+        { text: "Ok, fine", onPress: requestLocationPermission },
       ],
     )
   }
@@ -136,6 +142,7 @@ const InformativePage = (props: Props) => {
         <LaterButton onPress={encouragementAlert} />
         <AllowButton onPress={requestLocationPermission} />
       </ButtonsContainer>
+      <LoadingModal visible={loading} />
     </Page>
   )
 }

@@ -3,14 +3,14 @@ import { Provider } from "react-redux"
 import { ThemeProvider } from "styled-components/native"
 import createStore from "./src/redux/store"
 import themes from "src/styles/themes/index"
-import OnboardingNavigator from "src/components/navigators/OnboardingNavigation"
+import RootNavigator from "src/components/navigators/RootNavigator"
 
 const store = createStore()
 
 const App: React.FC = () => (
   <Provider store={store}>
     <ThemeProvider theme={themes.light}>
-      <OnboardingNavigator />
+      <RootNavigator />
     </ThemeProvider>
   </Provider>
 )
