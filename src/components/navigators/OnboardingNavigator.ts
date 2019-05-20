@@ -1,4 +1,4 @@
-import { createStackNavigator, createAppContainer } from "react-navigation"
+import { createStackNavigator } from "react-navigation"
 import Landing from "../landing/index"
 import AppIntro from "../app-intro/index"
 import Login from "../login/index"
@@ -25,4 +25,4 @@ const OnboardingNavigator = createStackNavigator(
   { mode: "modal", headerMode: "none" },
 )
 
-export default createAppContainer(OnboardingNavigator)
+export default OnboardingNavigator

@@ -14,6 +14,7 @@ import LaterButton from "./LaterButton"
 import AllowButton from "./AllowButton"
 import message from "./message"
 import { MapDispatchProps, MapStateProps } from "./index"
+import { NavigationProps } from "src/types/index"
 import {
   ImageContainer,
   MessageTitle,
@@ -21,11 +22,11 @@ import {
   ButtonsContainer,
 } from "./styled"
 
-interface Props extends MapDispatchProps, MapStateProps {}
+interface Props extends MapDispatchProps, MapStateProps, NavigationProps {}
 
 const InformativePage = (props: Props) => {
   const goToHomeScreen = () => {
-    console.log("going to home screen")
+    props.navigation.navigate && props.navigation.navigate("home")
   }
 
   const fetchLocation = async () => {
@@ -106,8 +107,8 @@ const InformativePage = (props: Props) => {
       "Come on",
       "You'll miss out on the best experience Flare has to offer!",
       [
-        { text: "Ok, fine", onPress: requestLocationPermission },
         { text: "Not now", onPress: fetchApproximateLocation },
+        { text: "Ok, fine", onPress: requestLocationPermission },
       ],
     )
   }
