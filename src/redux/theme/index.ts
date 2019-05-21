@@ -1,14 +1,14 @@
 export enum ThemeActionTypes {
-  switchTheme = "switchTheme",
+  switch_theme = "switch_theme",
 }
 
 export interface SwitchThemeAction {
-  type: ThemeActionTypes.switchTheme
+  type: ThemeActionTypes.switch_theme
 }
 
 export const themeActions = {
   switchTheme: (): SwitchThemeAction => ({
-    type: ThemeActionTypes.switchTheme,
+    type: ThemeActionTypes.switch_theme,
   }),
 }
 
@@ -24,7 +24,7 @@ export const themeReducer = (
   state = themeState,
   action: SwitchThemeAction,
 ): ThemeState => {
-  return action.type === ThemeActionTypes.switchTheme
+  return action.type === ThemeActionTypes.switch_theme
     ? { isDark: !state.isDark }
     : state
 }

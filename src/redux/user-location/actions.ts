@@ -39,12 +39,13 @@ export const userLocationActions = {
 
 const options = { timeout: 5000, enableHighAccuracy: true }
 
-export const asyncUserLocationActions = {
+export const userLocationAsyncActions = {
   fetchLocation: () => async (dispatch: Dispatch) => {
     navigator.geolocation.getCurrentPosition(
       (location) => {
-        // eslint-disable-next-line prettier/prettier
-        const { coords: { latitude, longitude } } = location
+        const {
+          coords: { latitude, longitude },
+        } = location
         return dispatch(
           userLocationActions.onFetchLocationSuccess({
             latitude,
