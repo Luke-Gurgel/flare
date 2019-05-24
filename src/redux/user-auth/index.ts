@@ -1,7 +1,7 @@
 import { UserAuthState, UserAuthActionTypes, UserAuthAction } from "./types"
 
 export const userAuthState: UserAuthState = {
-  loggedIn: false,
+  loggedIn: true,
   email: "",
   fname: "",
   lname: "",
