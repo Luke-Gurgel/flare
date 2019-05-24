@@ -1,18 +1,14 @@
 import React from "react"
-import { View, Text } from "react-native"
+import { Page } from "./styled"
+import MenuButton from "./MenuButton"
+import Map from "./Map"
 
 const Home = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#F77344",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Hello World</Text>
-    </View>
+    <Page>
+      <Map />
+      <MenuButton onPress={() => {}} />
+    </Page>
   )
 }
 
