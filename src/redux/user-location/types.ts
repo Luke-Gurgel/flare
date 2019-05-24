@@ -2,6 +2,8 @@ export interface UserLocationState {
   readonly latitude: number
   readonly longitude: number
   readonly isApproximate: boolean
+  readonly latitudeDelta?: number
+  readonly longitudeDelta?: number
   readonly city?: string
   readonly region?: string
   readonly country?: string

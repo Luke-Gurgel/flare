@@ -36,6 +36,7 @@
     "react-native-gesture-handler": "^1.1.0",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-linear-gradient": "^2.5.4",
+    "react-native-maps": "^0.24.2",
     "react-native-permissions": "^1.1.1",
     "react-native-spinkit": "^1.2.0",
     "react-native-textinput-effects": "^0.5.1",

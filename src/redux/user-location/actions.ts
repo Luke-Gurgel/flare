@@ -1,4 +1,5 @@
 import { Dispatch } from "redux"
+import { regionFrom } from "./location-helpers"
 import {
   UserLocationState,
   UserLocationActionTypes,
@@ -43,13 +44,14 @@ export const userLocationAsyncActions = {
   fetchLocation: () => async (dispatch: Dispatch) => {
     navigator.geolocation.getCurrentPosition(
       (location) => {
-        const {
-          coords: { latitude, longitude },
-        } = location
+        const userRegion = regionFrom(
+          location.coords.latitude,
+          location.coords.longitude,
+          location.coords.accuracy,
+        )
         return dispatch(
           userLocationActions.onFetchLocationSuccess({
-            latitude,
-            longitude,
+            ...userRegion,
             isApproximate: false,
           }),
         )
