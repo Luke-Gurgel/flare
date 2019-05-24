@@ -1,19 +1,19 @@
 import React from "react"
 import { StatusBar } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
-import { NavigationProps } from "src/types/index"
+import { NavigationScreenProps } from "react-navigation"
 import { GradientPage, LogoContainer, AppName } from "./styled"
 import { LogoIcon, CloseButton } from "src/components/common"
 import LoginForm from "./LoginForm"
 import SignupInvite from "./SignupInvite"
 
-const Login = ({ navigation }: NavigationProps) => {
+const Login = ({ navigation }: NavigationScreenProps) => {
   const dismiss = () => {
-    navigation.dismiss && navigation.dismiss()
+    navigation.dismiss()
   }
 
   const goToSignupPage = () => {
-    navigation.navigate && navigation.navigate("signup")
+    navigation.navigate("signup")
   }
 
   return (

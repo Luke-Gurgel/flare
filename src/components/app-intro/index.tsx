@@ -2,12 +2,12 @@ import React from "react"
 import { ScrollView } from "react-native"
 import { Page } from "./styled"
 import PageHeader from "./PageHeader"
-import { NavigationProps } from "src/types/index"
+import { NavigationScreenProps } from "react-navigation"
 import pageArray from "./page-array"
 
-const AppIntro = ({ navigation }: NavigationProps) => {
+const AppIntro = ({ navigation }: NavigationScreenProps) => {
   const goBack = () => {
-    navigation.goBack && navigation.goBack()
+    navigation.goBack()
   }
 
   return (
