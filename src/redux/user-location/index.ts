@@ -8,8 +8,10 @@ export const userLocationState: UserLocationState = {
   city: "Boston",
   region: "Massachusetts",
   country: "US",
-  latitude: 0,
-  longitude: 0,
+  latitude: 42.258605,
+  longitude: -71.484266,
+  latitudeDelta: 0.0922,
+  longitudeDelta: 0.0421,
   isApproximate: false,
   errorMessage: null,
 }
