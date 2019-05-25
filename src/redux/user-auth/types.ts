@@ -1,11 +1,6 @@
-export interface User {
-  readonly email: string
-  readonly fname?: string
-  readonly lname?: string
-}
-
-export interface UserAuthState extends User {
+export interface UserAuthState {
   readonly loggedIn: boolean
+  readonly email: string
   readonly loginError?: string
   readonly signupError?: string
 }
@@ -19,7 +14,7 @@ export enum UserAuthActionTypes {
 }
 
 export interface LoginSuccessAction {
-  user: User
+  email: string
   type: UserAuthActionTypes.log_in_success
 }
 
@@ -29,7 +24,7 @@ export interface LoginErrorAction {
 }
 
 export interface SignupSuccessAction {
-  user: User
+  email: string
   type: UserAuthActionTypes.sign_up_success
 }
 

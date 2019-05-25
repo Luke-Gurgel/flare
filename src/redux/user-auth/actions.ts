@@ -1,6 +1,5 @@
 import { Dispatch } from "redux"
 import {
-  User,
   UserAuthActionTypes,
   LoginSuccessAction,
   LoginErrorAction,
@@ -10,17 +9,17 @@ import {
 } from "./types"
 
 export const userAuthActions = {
-  onLoginSuccess: (user: User): LoginSuccessAction => ({
+  onLoginSuccess: (email: string): LoginSuccessAction => ({
     type: UserAuthActionTypes.log_in_success,
-    user,
+    email,
   }),
   onLoginError: (error: string): LoginErrorAction => ({
     type: UserAuthActionTypes.log_in_error,
     error,
   }),
-  onSignupSuccess: (user: User): SignupSuccessAction => ({
+  onSignupSuccess: (email: string): SignupSuccessAction => ({
     type: UserAuthActionTypes.sign_up_success,
-    user,
+    email,
   }),
   onSignupError: (error: string): SignupErrorAction => ({
     type: UserAuthActionTypes.sign_up_error,
@@ -36,7 +35,7 @@ export const userAuthAsyncActions = {
     const random = Math.round(Math.random())
     setTimeout(() => {
       return random
-        ? dispatch(userAuthActions.onLoginSuccess({ email: "f@f.io" }))
+        ? dispatch(userAuthActions.onLoginSuccess("me@mail.com"))
         : dispatch(userAuthActions.onLoginError("Sorry, couldn't log in."))
     }, 1500)
   },
@@ -44,7 +43,7 @@ export const userAuthAsyncActions = {
     const random = Math.round(Math.random())
     setTimeout(() => {
       return random
-        ? dispatch(userAuthActions.onSignupSuccess({ email: "f@f.io" }))
+        ? dispatch(userAuthActions.onSignupSuccess("me@mail.com"))
         : dispatch(userAuthActions.onSignupError("Sorry, couldn't sign up."))
     }, 1500)
   },

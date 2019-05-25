@@ -19,7 +19,7 @@ export const userLocationState: UserLocationState = {
 export const userLocationReducer = (
   state = userLocationState,
   action: UserLocationAction,
-) => {
+): UserLocationState => {
   switch (action.type) {
     case UserLocationActionTypes.on_fetch_approximate_location_success:
       return { ...state, ...action.location }
