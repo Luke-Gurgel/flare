@@ -1,9 +1,10 @@
-import { createDrawerNavigator } from "react-navigation"
+import { createAppContainer, createDrawerNavigator } from "react-navigation"
 import Home from "../home/index"
+import SideDrawer from "../side-drawer"
 
 const HomeNavigator = createDrawerNavigator(
   { home: Home },
-  { initialRouteName: "home" },
+  { initialRouteName: "home", contentComponent: SideDrawer },
 )
 
-export default HomeNavigator
+export default createAppContainer(HomeNavigator)
