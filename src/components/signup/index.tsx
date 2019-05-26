@@ -4,16 +4,13 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { Page, PageHeader } from "src/components/common/index"
 import { PageTitle, Message, Description } from "./styled"
 import SignupForm from "./SignupForm"
-import { NavigationProps } from "src/types/index"
+import { NavigationScreenProps } from "react-navigation"
 
-const Signup = ({ navigation }: NavigationProps) => {
-  const comingFromLanding =
-    navigation.getParam && navigation.getParam("comingFromLanding", false)
+const Signup = ({ navigation }: NavigationScreenProps) => {
+  const comingFromLanding = navigation.getParam("comingFromLanding", false)
 
   const goBack = () => {
-    comingFromLanding
-      ? navigation.dismiss && navigation.dismiss()
-      : navigation.goBack && navigation.goBack()
+    comingFromLanding ? navigation.dismiss() : navigation.goBack()
   }
 
   return (

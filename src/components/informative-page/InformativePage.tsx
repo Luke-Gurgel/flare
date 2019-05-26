@@ -14,7 +14,7 @@ import LaterButton from "./LaterButton"
 import AllowButton from "./AllowButton"
 import message from "./message"
 import { MapDispatchProps, MapStateProps } from "./index"
-import { NavigationProps } from "src/types/index"
+import { NavigationScreenProps } from "react-navigation"
 import {
   ImageContainer,
   MessageTitle,
@@ -22,14 +22,17 @@ import {
   ButtonsContainer,
 } from "./styled"
 
-interface Props extends MapDispatchProps, MapStateProps, NavigationProps {}
+interface Props
+  extends MapDispatchProps,
+    MapStateProps,
+    NavigationScreenProps {}
 
 const InformativePage = (props: Props) => {
   const [loading, setLoading] = useState(false)
 
   const goToHomeScreen = () => {
     setLoading(false)
-    props.navigation.navigate && props.navigation.navigate("home")
+    props.navigation.navigate("home")
   }
 
   const fetchLocation = async () => {

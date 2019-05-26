@@ -4,7 +4,7 @@ import { Page, LogoIcon } from "src/components/common/index"
 import Message from "./Message"
 import AuthButtons from "./AuthButtons"
 import AppIntroInvite from "./AppIntroInvite"
-import { NavigationProps } from "src/types/index"
+import { NavigationScreenProps } from "react-navigation"
 
 const LogoContainer = styled.View`
   flex-grow: 1;
@@ -12,18 +12,17 @@ const LogoContainer = styled.View`
   align-items: center;
 `
 
-const Landing = ({ navigation }: NavigationProps) => {
+const Landing = ({ navigation }: NavigationScreenProps) => {
   const showAppIntro = () => {
-    navigation.navigate && navigation.navigate("appIntro")
+    navigation.navigate("appIntro")
   }
 
   const login = () => {
-    navigation.navigate && navigation.navigate("login")
+    navigation.navigate("login")
   }
 
   const signup = () => {
-    navigation.navigate &&
-      navigation.navigate("signup", { comingFromLanding: true })
+    navigation.navigate("signup", { comingFromLanding: true })
   }
 
   return (

@@ -4,10 +4,10 @@ import { withNavigation } from "react-navigation"
 import { EmailInput, PasswordInput, ConfirmPasswordInput } from "./SignupInputs"
 import Legalese from "./Legalese"
 import SignupButton from "./SignupButton"
-import { NavigationProps } from "src/types/index"
+import { NavigationScreenProps } from "react-navigation"
 import { LoadingModal } from "src/components/common/index"
 
-const SignupForm = ({ navigation }: NavigationProps) => {
+const SignupForm = ({ navigation }: NavigationScreenProps) => {
   const [signupRequest, setSignupRequest] = useState({
     loading: false,
     success: false,
@@ -22,7 +22,7 @@ const SignupForm = ({ navigation }: NavigationProps) => {
 
   const goToInformativePage = () => {
     if (signupRequest.success) {
-      navigation.navigate && navigation.navigate("informativePage")
+      navigation.navigate("informativePage")
     }
   }
 

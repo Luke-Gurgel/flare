@@ -1,10 +1,8 @@
 import { UserAuthState, UserAuthActionTypes, UserAuthAction } from "./types"
 
 export const userAuthState: UserAuthState = {
-  loggedIn: false,
+  loggedIn: true,
   email: "",
-  fname: "",
-  lname: "",
   loginError: undefined,
   signupError: undefined,
 }
@@ -27,8 +25,6 @@ export const userAuthReducer = (
         ...state,
         loggedIn: false,
         email: "",
-        fname: "",
-        lname: "",
         loginError: undefined,
         signupError: undefined,
       }

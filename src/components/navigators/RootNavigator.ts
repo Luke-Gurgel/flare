@@ -1,10 +1,10 @@
 import { createAppContainer, createStackNavigator } from "react-navigation"
 import { zoomIn } from "react-navigation-transitions"
 import OnboardingNavigator from "./OnboardingNavigator"
-import Home from "../home/index"
+import HomeNavigator from "./HomeNavigator"
 
 const RootNavigator = createStackNavigator(
-  { onboarding: OnboardingNavigator, home: Home },
+  { onboarding: OnboardingNavigator, home: HomeNavigator },
   {
     transitionConfig: () => zoomIn(700),
     headerMode: "none",
