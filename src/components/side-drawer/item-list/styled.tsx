@@ -10,7 +10,9 @@ interface Props extends ThemeProps {
   isActive: boolean
 }
 
-export const ItemContainer = styled.TouchableOpacity<Props>`
+export const ItemButton = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.5,
+})<Props>`
   flex-grow: 1;
   flex-direction: row;
   align-items: center;

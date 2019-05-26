@@ -1,17 +1,15 @@
 import React from "react"
 import { SafeAreaView } from "react-native"
+import { connect } from "react-redux"
 import Item from "./Item"
 import { ItemListContainer } from "./styled"
+import { InitialState } from "src/redux/initialState"
 
-const items = [
-  { title: "Home", iconName: "home" },
-  { title: "Profile", iconName: "person" },
-  { title: "Dashboard", iconName: "dashboard" },
-  { title: "Settings", iconName: "settings" },
-  { title: "Help", iconName: "help" },
-]
+interface MapStateProps {
+  items: { title: string; iconName: string }[]
+}
 
-const DrawerItems = () => {
+const DrawerItems = ({ items }: MapStateProps) => {
   return (
     <SafeAreaView>
       <ItemListContainer bounces={false}>
@@ -27,4 +25,8 @@ const DrawerItems = () => {
   )
 }
 
-export default DrawerItems
+const mapState = (state: InitialState): MapStateProps => ({
+  items: state.sideDrawer.items,
+})
+
+export default connect(mapState)(DrawerItems)
