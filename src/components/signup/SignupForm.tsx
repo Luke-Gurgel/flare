@@ -20,15 +20,9 @@ const SignupForm = ({ navigation }: NavigationScreenProps) => {
     }, 1000)
   }
 
-  const goToInformativePage = () => {
-    if (signupRequest.success) {
-      navigation.navigate("informativePage")
-    }
-  }
-
   useEffect(() => {
     if (signupRequest.success && !signupRequest.loading) {
-      goToInformativePage()
+      navigation.navigate("profileInfoForm")
     }
   })
 
