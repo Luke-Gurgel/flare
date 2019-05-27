@@ -15,6 +15,10 @@ export const userProfileReducer = (
   action: UserProfileAction,
 ): UserProfileState => {
   switch (action.type) {
+    case UserProfileActionTypes.set_profile_info_success:
+      return { ...state, ...action.info }
+    case UserProfileActionTypes.set_profile_info_error:
+      return { ...state, error: action.error }
     case UserProfileActionTypes.set_full_name_success:
       return { ...state, fullName: action.fullName, error: undefined }
     case UserProfileActionTypes.set_full_name_error:

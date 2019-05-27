@@ -1,13 +1,26 @@
 import { Dispatch } from "redux"
 import {
+  UserProfileState,
   UserProfileActionTypes,
   SetFullNameSuccessAction,
   SetFullNameErrorAction,
   SetProfilePictureSuccessAction,
   SetProfilePictureErrorAction,
+  SetProfileInfoSuccessAction,
+  SetProfileInfoErrorAction,
 } from "./types"
 
 export const userProfileActions = {
+  onSetProfileInfoSuccess: (
+    info: UserProfileState,
+  ): SetProfileInfoSuccessAction => ({
+    type: UserProfileActionTypes.set_profile_info_success,
+    info,
+  }),
+  onSetProfileInfoError: (error: string): SetProfileInfoErrorAction => ({
+    type: UserProfileActionTypes.set_profile_info_error,
+    error,
+  }),
   onSetFullNameSuccess: (fullName: string): SetFullNameSuccessAction => ({
     type: UserProfileActionTypes.set_full_name_success,
     fullName,
@@ -29,30 +42,14 @@ export const userProfileActions = {
 }
 
 export const userProfileAsyncActions = {
-  setFullName: () => async (dispatch: Dispatch) => {
+  setProfileInfo: (info: UserProfileState) => async (dispatch: Dispatch) => {
     const random = Math.round(Math.random())
     setTimeout(() => {
       return random
-        ? dispatch(userProfileActions.onSetFullNameSuccess("Luke Gurgel"))
+        ? dispatch(userProfileActions.onSetProfileInfoSuccess(info))
         : dispatch(
-            userProfileActions.onSetFullNameError(
+            userProfileActions.onSetProfileInfoError(
               "Sorry, could not connect to the server.",
-            ),
-          )
-    }, 1500)
-  },
-  setProfilePicture: () => async (dispatch: Dispatch) => {
-    const random = Math.round(Math.random())
-    setTimeout(() => {
-      return random
-        ? dispatch(
-            userProfileActions.onSetProfilePictureSuccess(
-              "https://facebook.github.io/react-native/docs/assets/favicon.png",
-            ),
-          )
-        : dispatch(
-            userProfileActions.onSetProfilePictureError(
-              "Sorry, could not update your profile picture.",
             ),
           )
     }, 1500)

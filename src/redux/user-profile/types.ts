@@ -5,10 +5,22 @@ export interface UserProfileState {
 }
 
 export enum UserProfileActionTypes {
+  set_profile_info_success = "set_profile_info_success",
+  set_profile_info_error = "set_profile_info_error",
   set_full_name_success = "set_full_name_success",
   set_full_name_error = "set_full_name_error",
   set_profile_pic_success = "set_profile_pic_success",
   set_profile_pic_error = "set_profile_pic_error",
+}
+
+export interface SetProfileInfoSuccessAction {
+  type: UserProfileActionTypes.set_profile_info_success
+  info: UserProfileState
+}
+
+export interface SetProfileInfoErrorAction {
+  type: UserProfileActionTypes.set_profile_info_error
+  error: string
 }
 
 export interface SetFullNameSuccessAction {
@@ -32,6 +44,8 @@ export interface SetProfilePictureErrorAction {
 }
 
 export type UserProfileAction =
+  | SetProfileInfoSuccessAction
+  | SetProfileInfoErrorAction
   | SetFullNameSuccessAction
   | SetFullNameErrorAction
   | SetProfilePictureSuccessAction
