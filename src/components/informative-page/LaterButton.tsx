@@ -4,7 +4,7 @@ import { SoftButtonText } from "src/components/common/index"
 
 const LaterButton = ({ onPress }: { onPress: () => void }) => (
   <TouchableOpacity onPress={onPress}>
-    <SoftButtonText color="#777">Later</SoftButtonText>
+    <SoftButtonText color="lightgray">Maybe Later</SoftButtonText>
   </TouchableOpacity>
 )
 

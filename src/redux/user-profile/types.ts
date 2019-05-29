@@ -1,52 +1,38 @@
-export interface UserProfileState {
-  fullName: string
-  profilePicture: string
-  error?: string
+type RequestStatus = "success" | "error" | "waiting" | "none"
+
+export interface UserProfileInfo {
+  readonly fullName: string
+  readonly profilePicture: string
 }
+
+export interface UserProfileRequest {
+  readonly loading: boolean
+  readonly requestStatus: RequestStatus
+}
+
+export interface UserProfileState extends UserProfileInfo, UserProfileRequest {}
 
 export enum UserProfileActionTypes {
-  set_profile_info_success = "set_profile_info_success",
-  set_profile_info_error = "set_profile_info_error",
-  set_full_name_success = "set_full_name_success",
-  set_full_name_error = "set_full_name_error",
-  set_profile_pic_success = "set_profile_pic_success",
-  set_profile_pic_error = "set_profile_pic_error",
+  set_request_status = "set_request_status",
+  on_set_profile_info_success = "on_set_profile_info_success",
+  on_set_profile_info_error = "on_set_profile_info_error",
 }
 
-export interface SetProfileInfoSuccessAction {
-  type: UserProfileActionTypes.set_profile_info_success
+export interface SetRequestStatus {
+  type: UserProfileActionTypes.set_request_status
+  status: UserProfileRequest
+}
+
+export interface OnSetProfileInfoSuccessAction {
+  type: UserProfileActionTypes.on_set_profile_info_success
   info: UserProfileState
 }
 
-export interface SetProfileInfoErrorAction {
-  type: UserProfileActionTypes.set_profile_info_error
-  error: string
-}
-
-export interface SetFullNameSuccessAction {
-  type: UserProfileActionTypes.set_full_name_success
-  fullName: string
-}
-
-export interface SetFullNameErrorAction {
-  type: UserProfileActionTypes.set_full_name_error
-  error: string
-}
-
-export interface SetProfilePictureSuccessAction {
-  type: UserProfileActionTypes.set_profile_pic_success
-  picUri: string
-}
-
-export interface SetProfilePictureErrorAction {
-  type: UserProfileActionTypes.set_profile_pic_error
-  error: string
+export interface OnSetProfileInfoErrorAction {
+  type: UserProfileActionTypes.on_set_profile_info_error
 }
 
 export type UserProfileAction =
-  | SetProfileInfoSuccessAction
-  | SetProfileInfoErrorAction
-  | SetFullNameSuccessAction
-  | SetFullNameErrorAction
-  | SetProfilePictureSuccessAction
-  | SetProfilePictureErrorAction
+  | SetRequestStatus
+  | OnSetProfileInfoSuccessAction
+  | OnSetProfileInfoErrorAction
