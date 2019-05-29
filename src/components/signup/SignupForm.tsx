@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { View } from "react-native"
-import { withNavigation } from "react-navigation"
+import { withNavigation, NavigationScreenProps } from "react-navigation"
 import { EmailInput, PasswordInput, ConfirmPasswordInput } from "./SignupInputs"
 import Legalese from "./Legalese"
 import SignupButton from "./SignupButton"
-import { NavigationScreenProps } from "react-navigation"
 import { LoadingModal } from "src/components/common/index"
 
 const SignupForm = ({ navigation }: NavigationScreenProps) => {
@@ -20,15 +19,9 @@ const SignupForm = ({ navigation }: NavigationScreenProps) => {
     }, 1000)
   }
 
-  const goToInformativePage = () => {
-    if (signupRequest.success) {
-      navigation.navigate("informativePage")
-    }
-  }
-
   useEffect(() => {
     if (signupRequest.success && !signupRequest.loading) {
-      goToInformativePage()
+      navigation.navigate("profileInfoForm")
     }
   })
 

@@ -1,60 +1,62 @@
 import { Dispatch } from "redux"
 import {
+  UserProfileInfo,
+  UserProfileState,
+  UserProfileRequest,
   UserProfileActionTypes,
-  SetFullNameSuccessAction,
-  SetFullNameErrorAction,
-  SetProfilePictureSuccessAction,
-  SetProfilePictureErrorAction,
+  SetRequestStatus,
+  OnSetProfileInfoSuccessAction,
+  OnSetProfileInfoErrorAction,
 } from "./types"
 
 export const userProfileActions = {
-  onSetFullNameSuccess: (fullName: string): SetFullNameSuccessAction => ({
-    type: UserProfileActionTypes.set_full_name_success,
-    fullName,
-  }),
-  onSetFullNameError: (error: string): SetFullNameErrorAction => ({
-    type: UserProfileActionTypes.set_full_name_error,
-    error,
-  }),
-  onSetProfilePictureSuccess: (
-    picUri: string,
-  ): SetProfilePictureSuccessAction => ({
-    type: UserProfileActionTypes.set_profile_pic_success,
-    picUri,
-  }),
-  onSetProfilePictureError: (error: string): SetProfilePictureErrorAction => ({
-    type: UserProfileActionTypes.set_profile_pic_error,
-    error,
-  }),
+  setRequestStatus: (status: UserProfileRequest): SetRequestStatus => {
+    return {
+      type: UserProfileActionTypes.set_request_status,
+      status,
+    }
+  },
+  onSetProfileInfoSuccess: (
+    info: UserProfileState,
+  ): OnSetProfileInfoSuccessAction => {
+    return {
+      type: UserProfileActionTypes.on_set_profile_info_success,
+      info,
+    }
+  },
+  onSetProfileInfoError: (): OnSetProfileInfoErrorAction => {
+    return {
+      type: UserProfileActionTypes.on_set_profile_info_error,
+    }
+  },
 }
 
 export const userProfileAsyncActions = {
-  setFullName: () => async (dispatch: Dispatch) => {
-    const random = Math.round(Math.random())
-    setTimeout(() => {
-      return random
-        ? dispatch(userProfileActions.onSetFullNameSuccess("Luke Gurgel"))
-        : dispatch(
-            userProfileActions.onSetFullNameError(
-              "Sorry, could not connect to the server.",
-            ),
-          )
-    }, 1500)
-  },
-  setProfilePicture: () => async (dispatch: Dispatch) => {
-    const random = Math.round(Math.random())
-    setTimeout(() => {
-      return random
-        ? dispatch(
-            userProfileActions.onSetProfilePictureSuccess(
-              "https://facebook.github.io/react-native/docs/assets/favicon.png",
-            ),
-          )
-        : dispatch(
-            userProfileActions.onSetProfilePictureError(
-              "Sorry, could not update your profile picture.",
-            ),
-          )
-    }, 1500)
+  setProfileInfo: (info: UserProfileInfo) => async (dispatch: Dispatch) => {
+    dispatch(
+      userProfileActions.setRequestStatus({
+        loading: true,
+        requestStatus: "waiting",
+      }),
+    )
+    return fetch("https://jsonplaceholder.typicode.com/todos/1")
+      .then((response) => response.json())
+      .then(() => {
+        dispatch(
+          userProfileActions.onSetProfileInfoSuccess({
+            ...info,
+            loading: false,
+            requestStatus: "success",
+          }),
+        )
+      })
+      .catch(() => {
+        dispatch(
+          userProfileActions.setRequestStatus({
+            loading: false,
+            requestStatus: "error",
+          }),
+        )
+      })
   },
 }

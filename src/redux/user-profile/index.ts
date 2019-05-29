@@ -7,7 +7,8 @@ import {
 export const userProfileState: UserProfileState = {
   fullName: "",
   profilePicture: "",
-  error: undefined,
+  loading: false,
+  requestStatus: "none",
 }
 
 export const userProfileReducer = (
@@ -15,14 +16,10 @@ export const userProfileReducer = (
   action: UserProfileAction,
 ): UserProfileState => {
   switch (action.type) {
-    case UserProfileActionTypes.set_full_name_success:
-      return { ...state, fullName: action.fullName, error: undefined }
-    case UserProfileActionTypes.set_full_name_error:
-      return { ...state, error: action.error }
-    case UserProfileActionTypes.set_profile_pic_success:
-      return { ...state, profilePicture: action.picUri, error: undefined }
-    case UserProfileActionTypes.set_profile_pic_error:
-      return { ...state, error: action.error }
+    case UserProfileActionTypes.set_request_status:
+      return { ...state, ...action.status }
+    case UserProfileActionTypes.on_set_profile_info_success:
+      return { ...state, ...action.info }
     default:
       return state
   }

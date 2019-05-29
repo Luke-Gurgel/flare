@@ -139,7 +139,7 @@ const InformativePage = (props: Props) => {
       <ImageContainer>
         <FontAwesome5 name={"gripfire"} size={180} color={"#39F3BB"} />
       </ImageContainer>
-      <MessageTitle>Real quick...</MessageTitle>
+      <MessageTitle>One last thing...</MessageTitle>
       <Message>{message}</Message>
       <ButtonsContainer>
         <LaterButton onPress={encouragementAlert} />
