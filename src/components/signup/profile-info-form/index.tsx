@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Alert } from "react-native"
+import { Alert, BackHandler } from "react-native"
 import { connect } from "react-redux"
 import { compose, AnyAction } from "redux"
 import { ThunkDispatch } from "redux-thunk"
@@ -43,10 +43,20 @@ const ProfileInfoForm = ({
   }
 
   useEffect(() => {
-    if (userProfile.requestStatus === "success") {
+    if (userProfile.status === "success") {
       setTimeout(() => navigation.navigate("informativePage"), 750)
-    } else if (userProfile.requestStatus === "error") {
+    } else if (userProfile.status === "error") {
       Alert.alert("Could not set profile info")
+    }
+
+    const blockAndroidBackButtonTap = () => true
+    BackHandler.addEventListener("hardwareBackPress", blockAndroidBackButtonTap)
+
+    return function cleanup() {
+      BackHandler.removeEventListener(
+        "hardwareBackPress",
+        blockAndroidBackButtonTap,
+      )
     }
   })
 

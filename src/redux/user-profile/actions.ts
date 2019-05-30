@@ -1,18 +1,17 @@
 import { Dispatch } from "redux"
+import { RequestState } from "src/types"
 import {
   UserProfileInfo,
   UserProfileState,
-  UserProfileRequest,
   UserProfileActionTypes,
   SetRequestStatus,
   OnSetProfileInfoSuccessAction,
-  OnSetProfileInfoErrorAction,
 } from "./types"
 
 export const userProfileActions = {
-  setRequestStatus: (status: UserProfileRequest): SetRequestStatus => {
+  setRequestStatus: (status: RequestState): SetRequestStatus => {
     return {
-      type: UserProfileActionTypes.set_request_status,
+      type: UserProfileActionTypes.set_profile_info_request_status,
       status,
     }
   },
@@ -24,11 +23,6 @@ export const userProfileActions = {
       info,
     }
   },
-  onSetProfileInfoError: (): OnSetProfileInfoErrorAction => {
-    return {
-      type: UserProfileActionTypes.on_set_profile_info_error,
-    }
-  },
 }
 
 export const userProfileAsyncActions = {
@@ -36,7 +30,7 @@ export const userProfileAsyncActions = {
     dispatch(
       userProfileActions.setRequestStatus({
         loading: true,
-        requestStatus: "waiting",
+        status: "waiting",
       }),
     )
     return fetch("https://jsonplaceholder.typicode.com/todos/1")
@@ -46,7 +40,7 @@ export const userProfileAsyncActions = {
           userProfileActions.onSetProfileInfoSuccess({
             ...info,
             loading: false,
-            requestStatus: "success",
+            status: "success",
           }),
         )
       })
@@ -54,7 +48,7 @@ export const userProfileAsyncActions = {
         dispatch(
           userProfileActions.setRequestStatus({
             loading: false,
-            requestStatus: "error",
+            status: "error",
           }),
         )
       })

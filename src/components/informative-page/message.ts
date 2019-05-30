@@ -1,5 +1,7 @@
 export default `
-Please allow access to your location in order to see tasks near you on the map.
+We higly recommend enabling access to location.
 
-This will enable you to get the most out of your experience with Flare. We promise your data is safe.
+This will enable us to show tasks near you in the map, facilitate the process of posting a task by auto filling the form and other cool things.
+
+We promise to not share your location data 😉.
 `
