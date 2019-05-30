@@ -1,4 +1,5 @@
 import React from "react"
+import { StatusBar } from "react-native"
 import { connect } from "react-redux"
 import { InitialState } from "src/redux/initialState"
 import { ThemeProvider } from "styled-components/native"
@@ -14,7 +15,10 @@ interface MapStateProps {
 const Bootstrap = ({ loggedIn, isDark }: MapStateProps) => {
   return (
     <ThemeProvider theme={isDark ? themes.dark : themes.light}>
-      {loggedIn ? <HomeNavigator /> : <RootNavigator />}
+      <>
+        <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
+        {loggedIn ? <HomeNavigator /> : <RootNavigator />}
+      </>
     </ThemeProvider>
   )
 }
