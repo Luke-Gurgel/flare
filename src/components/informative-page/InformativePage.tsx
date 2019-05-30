@@ -1,11 +1,4 @@
-import React, { useState, useEffect } from "react"
-import {
-  AppState,
-  AppStateStatus,
-  Alert,
-  Platform,
-  BackHandler,
-} from "react-native"
+import React, { useEffect } from "react"
 import Permissions from "react-native-permissions"
 import AndroidOpenSettings from "react-native-android-open-settings"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
@@ -13,8 +6,14 @@ import { Page, LoadingModal } from "src/components/common/index"
 import LaterButton from "./LaterButton"
 import AllowButton from "./AllowButton"
 import message from "./message"
-import { MapDispatchProps, MapStateProps } from "./index"
-import { NavigationScreenProps } from "react-navigation"
+import { Props } from "./index"
+import {
+  AppState,
+  AppStateStatus,
+  Alert,
+  Platform,
+  BackHandler,
+} from "react-native"
 import {
   ImageContainer,
   MessageTitle,
@@ -22,55 +21,17 @@ import {
   ButtonsContainer,
 } from "./styled"
 
-interface Props
-  extends MapDispatchProps,
-    MapStateProps,
-    NavigationScreenProps {}
-
 const InformativePage = (props: Props) => {
-  const [loading, setLoading] = useState(false)
-
-  const goToHomeScreen = () => {
-    setLoading(false)
-    props.navigation.navigate("home")
-  }
-
-  const fetchLocation = async () => {
-    setLoading(true)
-    await props.fetchLocation()
-    if (props.fetchLocationError) {
-      Alert.alert(
-        "Oops...",
-        "Could not fetch your location. We'll center the map on Boston, MA. You can change that in your profile settings.",
-        [{ text: "Ok, cool", onPress: goToHomeScreen }],
-      )
-    } else goToHomeScreen()
-  }
-
-  const fetchApproximateLocation = async () => {
-    setLoading(true)
-    await props.fetchApproximateLocation()
-    if (props.fetchLocationError) {
-      Alert.alert(
-        "Oops...",
-        "Could not fetch an approximate location. We'll center the map on Boston, MA. You can change that in your profile settings.",
-        [{ text: "Ok, cool", onPress: goToHomeScreen }],
-      )
-    } else {
-      goToHomeScreen()
-    }
-  }
-
-  const listenerHandler = async (appState: AppStateStatus) => {
+  const onAppBecomeActive = async (appState: AppStateStatus) => {
     if (appState === "active") {
       const res = await Permissions.check("location")
-      if (res === "authorized") fetchLocation()
-      else fetchApproximateLocation()
+      if (res === "authorized") props.fetchLocation()
+      else props.fetchApproximateLocation()
     }
   }
 
   const handleOpenSettings = () => {
-    AppState.addEventListener("change", listenerHandler)
+    AppState.addEventListener("change", onAppBecomeActive)
     if (Platform.OS === "android") {
       AndroidOpenSettings.appDetailsSettings()
     } else {
@@ -78,7 +39,7 @@ const InformativePage = (props: Props) => {
         Alert.alert(
           "Oops...",
           "Couldn't open the settings app. If you're still interested, hop over there and allow location access. Let's just go to the home screen for now.",
-          [{ text: "Ok, cool", onPress: fetchApproximateLocation }],
+          [{ text: "Ok, cool", onPress: props.fetchApproximateLocation }],
         )
       })
     }
@@ -89,7 +50,7 @@ const InformativePage = (props: Props) => {
       "Are you sure?",
       "Remember you can change this on the settings app at anytime.",
       [
-        { text: "Not now", onPress: fetchApproximateLocation },
+        { text: "Not now", onPress: props.fetchApproximateLocation },
         { text: "Open settings", onPress: handleOpenSettings },
       ],
     )
@@ -99,34 +60,42 @@ const InformativePage = (props: Props) => {
     Permissions.request("location").then((res) => {
       switch (res) {
         case "authorized":
-          fetchLocation()
+          props.fetchLocation()
           break
         case "denied":
           confirmationAlert()
           break
         default:
-          fetchApproximateLocation()
+          props.fetchApproximateLocation()
       }
     })
   }
 
   const encouragementAlert = () => {
     Alert.alert(
-      "Come on",
+      "Are you sure?",
       "You'll miss out on the best experience Flare has to offer!",
       [
-        { text: "Not now", onPress: fetchApproximateLocation },
+        { text: "Not now", onPress: props.fetchApproximateLocation },
         { text: "Ok, fine", onPress: requestLocationPermission },
       ],
     )
   }
 
   useEffect(() => {
+    if (props.userLocation.status === "success") {
+      setTimeout(() => props.navigation.navigate("home"), 750)
+    } else if (props.userLocation.status === "error") {
+      Alert.alert("Oops...", props.userLocation.error, [
+        { text: "Ok, cool", onPress: () => props.navigation.navigate("home") },
+      ])
+    }
+
     const blockAndroidBackButtonTap = () => true
     BackHandler.addEventListener("hardwareBackPress", blockAndroidBackButtonTap)
 
     return function cleanup() {
-      AppState.removeEventListener("change", listenerHandler)
+      AppState.removeEventListener("change", onAppBecomeActive)
       BackHandler.removeEventListener(
         "hardwareBackPress",
         blockAndroidBackButtonTap,
@@ -145,7 +114,7 @@ const InformativePage = (props: Props) => {
         <LaterButton onPress={encouragementAlert} />
         <AllowButton onPress={requestLocationPermission} />
       </ButtonsContainer>
-      <LoadingModal visible={loading} />
+      <LoadingModal visible={props.userLocation.loading} />
     </Page>
   )
 }
