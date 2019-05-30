@@ -1,24 +1,24 @@
 import { Dispatch } from "redux"
 import { regionFrom } from "./location-helpers"
+import { RequestState } from "src/types"
 import {
   UserLocationState,
   UserLocationActionTypes,
-  OnFetchLocationSuccess,
-  OnFetchLocationError,
+  SetRequestStatusAction,
+  OnFetchLocationSuccessAction,
   OnFetchApproximateLocationSuccessAction,
-  OnFetchApproximateLocationErrorAction,
 } from "./types"
 
 export const userLocationActions = {
+  setRequestStatus: (status: RequestState): SetRequestStatusAction => ({
+    type: UserLocationActionTypes.set_location_request_status,
+    status,
+  }),
   onFetchLocationSuccess: (
     location: UserLocationState,
-  ): OnFetchLocationSuccess => ({
+  ): OnFetchLocationSuccessAction => ({
     type: UserLocationActionTypes.on_fetch_location_success,
     location,
-  }),
-  onFetchLocationError: (error: string): OnFetchLocationError => ({
-    type: UserLocationActionTypes.on_fetch_location_error,
-    error,
   }),
   onFetchApproximateLocationActionSuccess: (
     location: UserLocationState,
@@ -28,58 +28,79 @@ export const userLocationActions = {
       location,
     }
   },
-  onFetchApproximateLocationActionError: (
-    error: string,
-  ): OnFetchApproximateLocationErrorAction => {
-    return {
-      type: UserLocationActionTypes.on_fetch_approximate_location_error,
-      error,
-    }
-  },
 }
 
 const options = { timeout: 5000, enableHighAccuracy: true }
 
 export const userLocationAsyncActions = {
   fetchLocation: () => async (dispatch: Dispatch) => {
-    navigator.geolocation.getCurrentPosition(
+    dispatch(
+      userLocationActions.setRequestStatus({
+        loading: true,
+        status: "waiting",
+      }),
+    )
+    return navigator.geolocation.getCurrentPosition(
       (location) => {
-        const userRegion = regionFrom(
+        const region = regionFrom(
           location.coords.latitude,
           location.coords.longitude,
           location.coords.accuracy,
         )
-        return dispatch(
+        dispatch(
           userLocationActions.onFetchLocationSuccess({
-            ...userRegion,
+            ...region,
             isApproximate: false,
+            status: "success",
+            loading: false,
           }),
         )
       },
       (error) =>
-        dispatch(userLocationActions.onFetchLocationError(error.message)),
+        dispatch(
+          userLocationActions.setRequestStatus({
+            loading: false,
+            status: "error",
+            error: error.message,
+          }),
+        ),
       options,
     )
   },
-  fetchApproximateLocation: () => async (dispatch: Dispatch) => {
-    try {
-      const res = await fetch("https://ipapi.co/json/")
-      const location = await res.json()
-      const { city, region, country, latitude, longitude } = location
-      return dispatch(
-        userLocationActions.onFetchApproximateLocationActionSuccess({
-          city,
-          region,
-          country,
-          latitude,
-          longitude,
-          isApproximate: true,
-        }),
-      )
-    } catch (error) {
-      return dispatch(
-        userLocationActions.onFetchApproximateLocationActionError(error.reason),
-      )
-    }
+  fetchApproximateLocation: () => (dispatch: Dispatch) => {
+    dispatch(
+      userLocationActions.setRequestStatus({
+        loading: true,
+        status: "waiting",
+      }),
+    )
+    return fetch("https://ipapi.co/json/")
+      .then((res) => res.json())
+      .then((location) => {
+        const { city, region, country, latitude, longitude } = location
+        dispatch(
+          userLocationActions.onFetchApproximateLocationActionSuccess({
+            city,
+            region,
+            country,
+            latitude,
+            longitude,
+            isApproximate: true,
+            status: "success",
+            loading: false,
+          }),
+        )
+      })
+      .catch((error) => {
+        dispatch(
+          dispatch(
+            userLocationActions.setRequestStatus({
+              loading: false,
+              status: "error",
+              error: error.message,
+            }),
+          ),
+        )
+      })
   },
 }

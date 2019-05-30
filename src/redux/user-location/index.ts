@@ -13,7 +13,9 @@ export const userLocationState: UserLocationState = {
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
   isApproximate: false,
-  errorMessage: null,
+  status: "none",
+  loading: false,
+  error: undefined,
 }
 
 export const userLocationReducer = (
@@ -23,12 +25,10 @@ export const userLocationReducer = (
   switch (action.type) {
     case UserLocationActionTypes.on_fetch_approximate_location_success:
       return { ...state, ...action.location }
-    case UserLocationActionTypes.on_fetch_approximate_location_error:
-      return { ...state, errorMessage: action.error }
     case UserLocationActionTypes.on_fetch_location_success:
       return { ...state, ...action.location }
-    case UserLocationActionTypes.on_fetch_location_error:
-      return { ...state, errorMessage: action.error }
+    case UserLocationActionTypes.set_location_request_status:
+      return { ...state, ...action.status }
     default:
       return state
   }

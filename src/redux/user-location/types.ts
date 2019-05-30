@@ -1,4 +1,6 @@
-export interface UserLocationState {
+import { RequestState } from "src/types"
+
+export interface UserLocation {
   readonly latitude: number
   readonly longitude: number
   readonly isApproximate: boolean
@@ -7,24 +9,24 @@ export interface UserLocationState {
   readonly city?: string
   readonly region?: string
   readonly country?: string
-  readonly errorMessage?: null | string
 }
+
+export interface UserLocationState extends UserLocation, RequestState {}
 
 export enum UserLocationActionTypes {
+  set_location_request_status = "set_location_request_status",
   on_fetch_approximate_location_success = "on_fetch_approximate_location_success",
-  on_fetch_approximate_location_error = "on_fetch_approximate_location_error",
   on_fetch_location_success = "on_fetch_location_success",
-  on_fetch_location_error = "on_fetch_location_error",
 }
 
-export interface OnFetchLocationSuccess {
+export interface SetRequestStatusAction {
+  type: UserLocationActionTypes.set_location_request_status
+  status: RequestState
+}
+
+export interface OnFetchLocationSuccessAction {
   type: UserLocationActionTypes.on_fetch_location_success
   location: UserLocationState
-}
-
-export interface OnFetchLocationError {
-  type: UserLocationActionTypes.on_fetch_location_error
-  error: string
 }
 
 export interface OnFetchApproximateLocationSuccessAction {
@@ -32,13 +34,7 @@ export interface OnFetchApproximateLocationSuccessAction {
   location: UserLocationState
 }
 
-export interface OnFetchApproximateLocationErrorAction {
-  type: UserLocationActionTypes.on_fetch_approximate_location_error
-  error: string
-}
-
 export type UserLocationAction =
-  | OnFetchLocationSuccess
-  | OnFetchLocationError
+  | SetRequestStatusAction
+  | OnFetchLocationSuccessAction
   | OnFetchApproximateLocationSuccessAction
-  | OnFetchApproximateLocationErrorAction
