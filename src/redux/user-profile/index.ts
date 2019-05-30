@@ -8,7 +8,8 @@ export const userProfileState: UserProfileState = {
   fullName: "",
   profilePicture: "",
   loading: false,
-  requestStatus: "none",
+  status: "none",
+  error: undefined,
 }
 
 export const userProfileReducer = (
@@ -16,7 +17,7 @@ export const userProfileReducer = (
   action: UserProfileAction,
 ): UserProfileState => {
   switch (action.type) {
-    case UserProfileActionTypes.set_request_status:
+    case UserProfileActionTypes.set_profile_info_request_status:
       return { ...state, ...action.status }
     case UserProfileActionTypes.on_set_profile_info_success:
       return { ...state, ...action.info }
