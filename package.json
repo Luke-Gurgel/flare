@@ -67,7 +67,7 @@
     "eslint-plugin-react": "^7.12.4",
     "husky": "^2.1.0",
     "jest": "24.7.1",
-    "lint-staged": "^8.1.5",
+    "lint-staged": "^13.1.0",
     "metro-react-native-babel-preset": "0.53.1",
     "prettier": "^1.17.0",
     "react-test-renderer": "16.8.3",
